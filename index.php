@@ -38,7 +38,7 @@
         </li>
         <li class="nav-item">
         <a class="nav-link" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
-            Scopri di più 
+            Login
         </a>
         </li>
         <li class="nav-item dropdown">
@@ -237,16 +237,21 @@
 <!--offcanvas---->
 <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
   <div class="offcanvas-header">
-    <h5 class="offcanvas-title" id="offcanvasExampleLabel">Informazioni varie su di noi</h5>
+    <h5 class="offcanvas-title me-5" id="offcanvasExampleLabel"> pagina di Login</h5>
+    <a href="./loginPage.php" class="btn btn-outline-secondary ms-3">Login</a>
+  
     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
+  <hr>
   <div class="offcanvas-body">
     <div>
-     La nostra vision: creare il sito di informazione e prenotazione eventi più famoso e conosciuto
+     <p>La nostra vision: creare il sito di informazione e prenotazione eventi più famoso e conosciuto,
+        scopri chi siamo e dove vogliamo arrivare: 
+     </p> 
     </div>
     <div class="dropdown mt-3">
       <!-- Card 1 -->
-      <div class="col-md-4 mt-3">
+      <div class="col-md-4 mt-5">
         <div class="card" style="width: 18rem;">
             <img src="https://via.placeholder.com/150" class="card-img-top" alt="Card image">
             <div class="card-body">
