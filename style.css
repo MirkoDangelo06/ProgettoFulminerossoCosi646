@@ -1,6 +1,6 @@
 #splash-screen {
     position: fixed;
-    width: 100%;
+    width: 100vw;
     height: 100vh;
     background: black;
     display: flex;
@@ -15,45 +15,7 @@
     object-fit: cover;
 }
 
-#splash-title {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 3rem;
-    color: white;
-    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
-    text-align: center;
-    font-family: 'Playfair Display', serif; /* Usa Playfair Display */
-
-}
-.t1{
-    font-family: 'Playfair Display', serif; /* Usa Playfair Display */
-    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
-}
-.sfondo1{
-    width: 100%; /* Larghezza del div */
-    height: 700px; /* Altezza del div */
-    background-image: url('./photos/glass2.jpg'); /* Percorso dell'immagine */
-    background-size: cover; /* Rende l'immagine di sfondo coprente */
-    background-position: center; /* Centra l'immagine di sfondo */
-}
-
-.sfondo2{
-    width: 100%; /* Larghezza del div */
-    background-image: url('./photos/glass1.jpg'); /* Percorso dell'immagine */
-    background-size: cover; /* Rende l'immagine di sfondo coprente */
-    background-position: center; /* Centra l'immagine di sfondo */
-}
-
-.sfondo3{
-    width: 100%; /* Larghezza del div */
-    background-image: url('./photos/g2.jpg'); /* Percorso dell'immagine */
-    background-size: cover; /* Rende l'immagine di sfondo coprente */
-    background-position: center; /* Centra l'immagine di sfondo */
-}
-
-/* Animazione di dissolvenza */
+/* Aggiunta della classe per la dissolvenza */
 .fade-out {
     animation: fadeOut 1s forwards;
 }
