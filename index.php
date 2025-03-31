@@ -15,7 +15,7 @@
   <!--VIDEO-->
   <div id="splash-screen">
         <video autoplay muted playsinline id="splash-video">
-            <source src="./video/intro.mp4" type="video/mp4">
+            <source src="./video/intro3.mp4" type="video/mp4">
             Il tuo browser non supporta il tag video.
         </video>
     </div>
