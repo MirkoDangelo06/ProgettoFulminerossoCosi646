@@ -1,6 +1,6 @@
 #splash-screen {
     position: fixed;
-    width: 100%;
+    width: 100vw;
     height: 100vh;
     background: black;
     display: flex;
@@ -15,45 +15,7 @@
     object-fit: cover;
 }
 
-#splash-title {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 3rem;
-    color: white;
-    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
-    text-align: center;
-    font-family: 'Playfair Display', serif; /* Usa Playfair Display */
-
-}
-.t1{
-    font-family: 'Playfair Display', serif; /* Usa Playfair Display */
-    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
-}
-.sfondo1{
-    width: 100%; /* Larghezza del div */
-    height: 700px; /* Altezza del div */
-    background-image: url('./photos/glass2.jpg'); /* Percorso dell'immagine */
-    background-size: cover; /* Rende l'immagine di sfondo coprente */
-    background-position: center; /* Centra l'immagine di sfondo */
-}
-
-.sfondo2{
-    width: 100%; /* Larghezza del div */
-    background-image: url('./photos/glass1.jpg'); /* Percorso dell'immagine */
-    background-size: cover; /* Rende l'immagine di sfondo coprente */
-    background-position: center; /* Centra l'immagine di sfondo */
-}
-
-.sfondo3{
-    width: 100%; /* Larghezza del div */
-    background-image: url('./photos/g2.jpg'); /* Percorso dell'immagine */
-    background-size: cover; /* Rende l'immagine di sfondo coprente */
-    background-position: center; /* Centra l'immagine di sfondo */
-}
-
-/* Animazione di dissolvenza */
+/* Aggiunta della classe per la dissolvenza */
 .fade-out {
     animation: fadeOut 1s forwards;
 }
@@ -67,3 +29,33 @@
         visibility: hidden;
     }
 }
+
+
+body {
+    background-color: #f8f9fa;
+}
+.login-container {
+    max-width: 400px;
+    margin: 100px auto;
+    padding: 30px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.form-control:focus {
+    border-color: #6c757d;
+    box-shadow: 0 0 0 0.25rem rgba(108, 117, 125, 0.25);
+}
+.btn-login {
+    background-color: #212529;
+    color: white;
+    transition: all 0.3s;
+}
+.btn-login:hover {
+    background-color: #424649;
+    color: white;
+}
+
+
+.login-box { max-width: 400px; margin: 100px auto; padding: 20px; background: white; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+.register-box { max-width: 500px; margin: 50px auto; padding: 20px; background: white; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
