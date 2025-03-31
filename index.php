@@ -10,7 +10,7 @@
    
   
   </head>
-  <body class="bg-body-secondary  d-flex flex-column min-vh-100">
+  <body class="  d-flex flex-column min-vh-100">
 
   <!--VIDEO-->
   <div id="splash-screen">
@@ -65,98 +65,36 @@
 </nav>
 </div>
 
- <!-- Carosello con le card, aggiungi mt-5 per separare dalla navbar -->     
-
 <div class="mt-5 w-75 mx-auto my-auto">
-    <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-            <!--slide 1-->
-            <div class="carousel-item active">
-                <div class="container">
-                    <div class="row">
-                        <!-- Card 1 -->
-                        <div class="col-md-4">
-                            <div class="card" style="width: 18rem;">
-                                <img src="https://via.placeholder.com/150" class="card-img-top" alt="Card image">
-                                <div class="card-body">
-                                    <h5 class="card-title">Card 1</h5>
-                                    <p class="card-text">Questa è la prima card.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Card 2 -->
-                        <div class="col-md-4">
-                            <div class="card" style="width: 18rem;">
-                                <img src="https://via.placeholder.com/150" class="card-img-top" alt="Card image">
-                                <div class="card-body">
-                                    <h5 class="card-title">Card 2</h5>
-                                    <p class="card-text">Questa è la seconda card.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Card 3 -->
-                        <div class="col-md-4">
-                            <div class="card" style="width: 18rem;">
-                                <img src="https://via.placeholder.com/150" class="card-img-top" alt="Card image">
-                                <div class="card-body">
-                                    <h5 class="card-title">Card 3</h5>
-                                    <p class="card-text">Questa è la terza card.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+  <div class="container"> <!-- inizio della griglia con le card delle attività -->     
+    <?php  
+      (include "./connessione.php");//inclusione del file di connessione
+      echo '<div class="row">';//prima riga della griglia
+      $query = $conn->query("SELECT * FROM attivita");
+      $counter = 0;
+      while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
+        if ($counter % 3 == 0 && $counter != 0) { // se si sono superate le 3 card chiude la vecchia linea e ne crea una nuova
+          echo '</div><div class="row">';
+        }
+        
+        // Genera la card con i contenuti della tabella attivita
+        echo '<div class="col-md-4 mb-4 ">';
+        echo '  <div class="card" style="width: 18rem;">';
+        echo '<img src="' . htmlspecialchars($row['immagine_attivita']) . '" class="card-img-top">';
+        echo '    <div class="card-body">';
+        echo '      <h5 class="card-title">' . htmlspecialchars($row['nome_attivita']) . '</h5>';
+        echo '      <p class="card-text">' . htmlspecialchars($row['descrizione']) . '</p>';
+        echo '      <a href="#" class="btn btn-success">Maggiori Informazioni</a>';
+        echo '    </div>';
+        echo '  </div>';
+        echo '</div>';
+        $counter ++;
+      }
+      // Chiudi l'ultima riga e il container
+      echo '</div>';
 
-            <!--slide 2-->
-            <div class="carousel-item">
-                <div class="container">
-                    <div class="row">
-                        <!-- Card 4 -->
-                        <div class="col-md-4">
-                            <div class="card" style="width: 18rem;">
-                                <img src="https://via.placeholder.com/150" class="card-img-top" alt="Card image">
-                                <div class="card-body">
-                                    <h5 class="card-title">Card 4</h5>
-                                    <p class="card-text">Questa è la quarta card.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Card 5 -->
-                        <div class="col-md-4">
-                            <div class="card" style="width: 18rem;">
-                                <img src="https://via.placeholder.com/150" class="card-img-top" alt="Card image">
-                                <div class="card-body">
-                                    <h5 class="card-title">Card 5</h5>
-                                    <p class="card-text">Questa è la quinta card.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Card 6 -->
-                        <div class="col-md-4">
-                            <div class="card" style="width: 18rem;">
-                                <img src="https://via.placeholder.com/150" class="card-img-top" alt="Card image">
-                                <div class="card-body">
-                                    <h5 class="card-title">Card 6</h5>
-                                    <p class="card-text">Questa è la sesta card.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Controlli del carosello -->
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Precedente</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Successivo</span>
-        </button>
-    </div>
+      ?>
+  </div><!-- chiusura container -->     
 </div>
 
 <!-- Footer Section -->

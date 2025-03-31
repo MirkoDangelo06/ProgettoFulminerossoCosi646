@@ -3,4 +3,3 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById('splash-screen').classList.add('fade-out');
     }, 1000);
 });
-
