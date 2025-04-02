@@ -59,3 +59,74 @@ body {
 
 .login-box { max-width: 400px; margin: 100px auto; padding: 20px; background: white; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
 .register-box { max-width: 500px; margin: 50px auto; padding: 20px; background: white; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+
+
+
+
+/* bottone login */
+.button1 {
+    all: unset;
+    display: inline-flex;  /* Cambiato da flex a inline-flex */
+    align-items: center;
+    position: relative;
+    padding: 0.6em 2em;
+    border: mediumspringgreen solid 0.15em;
+    border-radius: 0.25em;
+    color: mediumspringgreen;
+    font-size: 1.5em;
+    font-weight: 600;
+    cursor: pointer;
+    overflow: hidden;
+    transition: border 800ms, color 800ms;
+    user-select: none;
+    width: auto;  /* Assicura che la larghezza sia determinata dal contenuto */
+}
+  
+  .button1 p {
+    z-index: 1;
+  }
+  
+  .button1:hover {
+    color: #212121;
+  }
+  
+  .button1:active {
+    border-color: teal;
+  }
+  
+  .button1::after, .button1::before {
+    content: "";
+    position: absolute;
+    width: 9em;
+    aspect-ratio: 1;
+    background: mediumspringgreen;
+    opacity: 50%;
+    border-radius: 50%;
+    transition: transform 800ms, background 300ms;
+  }
+  
+  .button1::before {
+    left: 0;
+    transform: translateX(-8em);
+  }
+  
+  .button1::after {
+    right: 0;
+    transform: translateX(8em);
+  }
+  
+  .button1:hover:before {
+    transform: translateX(-1em);
+  }
+  
+  .button1:hover:after {
+    transform: translateX(1em);
+  }
+  
+  .button1:active:before,
+  .button1:active:after {
+    background: teal;
+  }
+
+
+

@@ -14,8 +14,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $user = $stmt->fetch();
         
         if ($user && password_verify($password, $user['password'])) {
+            // Imposta le variabili di sessione SOLO se il login ha successo
             $_SESSION['user_id'] = $user['id_persona'];
             $_SESSION['user_name'] = $user['nome'] . ' ' . $user['cognome'];
+            $_SESSION['username'] = $user['username'];
+            
             header('Location: index.php');
             exit();
         } else {
@@ -35,18 +38,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Login</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-
 </head>
 <body>
     <div class="container">
         <div class="login-box">
             <h2 class="text-center mb-4">Accedi</h2>
-            <!--errore php-->
+            
             <?php if ($error): ?>
-                <div class="alert alert-danger"><?= $error ?></div>
+                <div class="alert alert-danger"><?= htmlspecialchars($error) ?></div>
             <?php endif; ?>
             
-            <!--form-->
             <form method="post">
                 <div class="mb-3">
                     <label class="form-label">Username</label>

@@ -12,6 +12,18 @@
   </head>
   <body class="  d-flex flex-column min-vh-100">
 
+<!--errore logout-->
+  <?php
+  session_start();
+    if (isset($_GET['logout']) && $_GET['logout'] == 1) {
+        echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                Logout effettuato con successo!
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>';
+    }
+  ?>
+
+
   <!--VIDEO-->
   <div id="splash-screen">
         <video autoplay muted playsinline id="splash-video">
@@ -22,49 +34,66 @@
 
 
     
-
-  <!--navbar-->
-  <div class="w-50 mx-auto">
+<!--navbar-->
+<div class="w-50 mx-auto">
   <nav class="navbar navbar-expand-lg bg-body-tertiary">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Navbar</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
-        </li>
-        <li class="nav-item">
-        <a class="nav-link" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
-            Login
-        </a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Filtri
-          </a>
-          <ul class="dropdown-menu">
-           
-            <li><a class="dropdown-item" href="#">Per data </a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Per tipo  attività</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Per luogo</a></li>
-          </ul>
-        </li>
-      
-      </ul>
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="index.php">Home</a>
+          </li>
+          
+          <?php if(!isset($_SESSION['user_id'])): ?>
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+              Login
+            </a>
+          </li>
+          <?php endif; ?>
+
+          <?php if(isset($_SESSION['user_id'])): ?>
+          <li class="nav-item">
+            <a class="nav-link" href="profile.php" role="button">
+              Il tuo profilo
+            </a>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link text-danger" href="logout.php" role="button">
+              <i class="bi bi-box-arrow-right"></i> Logout
+            </a>
+          </li>
+          <?php endif; ?>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Filtri
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Per data</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#">Per tipo attività</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#">Per luogo</a></li>
+            </ul>
+          </li>
+        </ul>
+
+        <form class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+      </div>
     </div>
-  </div>
-</nav>
+  </nav>
 </div>
 
+
+<!--grid-->
 <div class="mt-5 w-75 mx-auto my-auto">
   <div class="container"> <!-- inizio della griglia con le card delle attività -->     
     <?php  
