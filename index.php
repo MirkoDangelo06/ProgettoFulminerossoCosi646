@@ -24,6 +24,8 @@
   ?>
 
 
+
+
   <!--VIDEO-->
   <div id="splash-screen">
         <video autoplay muted playsinline id="splash-video">
@@ -33,8 +35,7 @@
     </div>
 
 
-    
-<!--navbar-->
+ <!--navbar-->
 <div class="w-50 mx-auto">
   <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
@@ -95,36 +96,40 @@
 
 <!--grid-->
 <div class="mt-5 w-75 mx-auto my-auto">
-  <div class="container"> <!-- inizio della griglia con le card delle attività -->     
-    <?php  
-      (include "./connessione.php");//inclusione del file di connessione
-      echo '<div class="row">';//prima riga della griglia
-      $query = $conn->query("SELECT * FROM attivita");
-      $counter = 0;
-      while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
-        if ($counter % 3 == 0 && $counter != 0) { // se si sono superate le 3 card chiude la vecchia linea e ne crea una nuova
-          echo '</div><div class="row">';
+  <form>  
+    <div class="container"> <!-- inizio della griglia con le card delle attività -->   
+      <?php  
+        (include "./connessione.php");//inclusione del file di connessione
+        echo '<div class="row">';//prima riga della griglia
+        $query = $conn->query("SELECT * FROM attivita");
+        $counter = 0;
+        while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
+          if ($counter % 3 == 0 && $counter != 0) { // se si sono superate le 3 card chiude la vecchia linea e ne crea una nuova
+            echo '</div><div class="row">';
+          }
+          
+          // Genera la card con i contenuti della tabella attivita
+          echo '<div class="col-md-4 mb-4 ">';
+          echo '  <div class="card" style="width: 18rem;">';
+          echo '<img src="' . htmlspecialchars($row['immagine_attivita']) . '" class="card-img-top">';
+          echo '    <div class="card-body">';
+          echo '      <h5 class="card-title">' . htmlspecialchars($row['nome_attivita']) . '</h5>';
+          echo '      <p class="card-text">' . htmlspecialchars($row['descrizione']) . '</p>';
+          echo '<a href="details.php?id=' . $row['id_attivita'] . '" class="button_card btn"> <svg class="svgIcon" viewBox="0 0 512 512" height="1em" xmlns="http://www.w3.org/2000/svg"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zm50.7-186.9L162.4 380.6c-19.4 7.5-38.5-11.6-31-31l55.5-144.3c3.3-8.5 9.9-15.1 18.4-18.4l144.3-55.5c19.4-7.5 38.5 11.6 31 31L325.1 306.7c-3.2 8.5-9.9 15.1-18.4 18.4zM288 256a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"></path></svg> Maggiori Informazioni</a>';
+          echo '    </div>';
+          echo '  </div>';
+          echo '</div>';
+          $counter ++;
         }
-        
-        // Genera la card con i contenuti della tabella attivita
-        echo '<div class="col-md-4 mb-4 ">';
-        echo '  <div class="card" style="width: 18rem;">';
-        echo '<img src="' . htmlspecialchars($row['immagine_attivita']) . '" class="card-img-top">';
-        echo '    <div class="card-body">';
-        echo '      <h5 class="card-title">' . htmlspecialchars($row['nome_attivita']) . '</h5>';
-        echo '      <p class="card-text">' . htmlspecialchars($row['descrizione']) . '</p>';
-        echo '      <a href="#" class="btn btn-success">Maggiori Informazioni</a>';
-        echo '    </div>';
-        echo '  </div>';
+        // Chiudi l'ultima riga e il container
         echo '</div>';
-        $counter ++;
-      }
-      // Chiudi l'ultima riga e il container
-      echo '</div>';
+        ?>
+    </div><!-- chiusura container -->
+  <form>     
+</div><!-- chiusura del div principale -->
 
-      ?>
-  </div><!-- chiusura container -->     
-</div>
+
+
 
 <!-- Footer Section -->
 <footer class="bg-dark text-light py-5 mt-5">
