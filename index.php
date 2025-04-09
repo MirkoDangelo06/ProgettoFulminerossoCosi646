@@ -132,6 +132,7 @@
 
 
 
+
 <!-- Footer Section -->
 <footer class="bg-dark text-light py-5 mt-5">
   <div class="container">
@@ -221,15 +222,16 @@
      <p>La nostra vision: creare il sito di informazione e prenotazione eventi più famoso e conosciuto,
         scopri chi siamo e dove vogliamo arrivare: 
      </p> 
+     <hr>
     </div>
     <div class="dropdown mt-3">
       <!-- Card 1 -->
       <div class="col-md-4 mt-5">
         <div class="card" style="width: 18rem;">
-            <img src="https://via.placeholder.com/150" class="card-img-top" alt="Card image">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSq3PCoO2a-Bp_8rpEqJ7yaxvMNfVWt6eAEKA&s" class="card-img-top" alt="Card image">
             <div class="card-body">
-                <h5 class="card-title">Card 4</h5>
-                <p class="card-text">Questa è la quarta card.</p>
+                <h5 class="card-title">Essere sempre aggiornati</h5>
+               
             </div>
         </div>
     </div>
@@ -239,10 +241,9 @@
       <!-- Card 2 -->
       <div class="col-md-4 mt-3">
         <div class="card" style="width: 18rem;">
-            <img src="https://via.placeholder.com/150" class="card-img-top" alt="Card image">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQqXAiq_Fe5Dyjb5aBLtkl7z2IyY_1bGlxeQ&s" class="card-img-top" alt="Card image">
             <div class="card-body">
-                <h5 class="card-title">Card 4</h5>
-                <p class="card-text">Questa è la quarta card.</p>
+                <h5 class="card-title">Scoprire le promozion</h5>
             </div>
         </div>
     </div>
@@ -252,10 +253,10 @@
       <!-- Card 3 -->
       <div class="col-md-4 mt-3">
         <div class="card" style="width: 18rem;">
-            <img src="https://via.placeholder.com/150" class="card-img-top" alt="Card image">
+            <img src="https://img.freepik.com/foto-gratuito/bambini-che-giocano-su-erba_1098-504.jpg" class="card-img-top" alt="Card image">
             <div class="card-body">
-                <h5 class="card-title">Card 4</h5>
-                <p class="card-text">Questa è la quarta card.</p>
+                <h5 class="card-title">Anche per i piu piccoli</h5>
+           
             </div>
         </div>
     </div>
