@@ -134,78 +134,77 @@
 
 
 <!-- Footer Section -->
-<footer class="bg-dark text-light py-5 mt-5">
-  <div class="container">
-    <div class="row">
-      <!-- Sponsors Section -->
-      <div class="col-md-4 mb-4">
-        <h5 class="text-uppercase mb-3">I Nostri Sponsor</h5>
-        <div class="d-flex justify-content-between">
-          <!-- Sponsor 1 -->
-          <div class="sponsor-logo">
-            <img src="https://via.placeholder.com/120x60?text=Gardaland" alt="Gardaland" class="img-fluid">
+<footer class="bg-dark text-light py-3 mt-5">
+    <div class="container">
+      <div class="row g-4"> <!-- Aggiunto gutter tra le colonne -->
+        <!-- Sponsors Section -->
+        <div class="col-md-4 mb-4">
+          <div class="h-100 p-3"> <!-- Contenitore interno con padding -->
+            <h5 class="text-uppercase mb-4 border-bottom pb-2">I Nostri Sponsor</h5> <!-- Aumentato spazio e aggiunto bordo -->
+            <div class="d-flex justify-content-center gap-4"> <!-- Centratura e spazio tra logo -->
+              <div class="sponsor-logo">
+                <img src="https://www.ctelift.com/wp-content/uploads/2017/07/Logo-Gardaland.jpg" alt="Gardaland" class="img-fluid rounded">
+              </div>
+              <div class="sponsor-logo">
+                <img src="https://www.liukdesign.net/wp-content/uploads/2023/07/wd-logo2.jpg" alt="Disneyland" class="img-fluid rounded">
+              </div>
+            </div>
           </div>
-          <!-- Sponsor 2 -->
-          <div class="sponsor-logo">
-            <img src="https://via.placeholder.com/120x60?text=Disneyland" alt="Disneyland" class="img-fluid">
+        </div>
+
+        <!-- Partnerships Section -->
+        <div class="col-md-4 mb-4">
+          <div class="h-100 p-3">
+            <h5 class="text-uppercase mb-4 border-bottom pb-2">Le Nostre Partnership</h5>
+            <div class="d-flex justify-content-center gap-3 flex-wrap"> <!-- Flex-wrap per responsive -->
+              <div class="partnership-logo">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkcg81bScWR3PIsca4apHbd5Vf8xNp8EJKLw&s" alt="Escursioni Trentino" class="img-fluid rounded">
+              </div>
+              <div class="partnership-logo">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCCiEDrmKtK__oQsJQ9SSwDFX66PM_Oursew&s" alt="Disney Parks" class="img-fluid rounded">
+              </div>
+              <div class="partnership-logo">
+                <img src="https://play-lh.googleusercontent.com/y_PbrLR8iRL6gAjeNhyM7GtZDVQfc-lZ_bwo-4ecmrLEObYeW6Ss0lDGUR0Yc9EvkVI8" alt="Parco Zoomarine" class="img-fluid rounded">
+              </div>
+            </div>
           </div>
-          <!-- Sponsor 3 -->
-          <div class="sponsor-logo">
-            <img src="https://via.placeholder.com/120x60?text=Trentino" alt="Trentino" class="img-fluid">
+        </div>
+
+        <!-- Links Section -->
+        <div class="col-md-4 mb-4">
+          <div class="h-100 p-3">
+            <h5 class="text-uppercase mb-4 border-bottom pb-2">Link Utili</h5>
+            <ul class="list-unstyled ps-3"> <!-- Padding sinistro -->
+              <li class="mb-2"><a href="#" class="text-light text-decoration-none hover-underline">Crediti</a></li>
+              <li class="mb-2"><a href="#" class="text-light text-decoration-none hover-underline">Privacy e Cookie</a></li>
+              <li class="mb-2"><a href="#" class="text-light text-decoration-none hover-underline">Termini di Servizio</a></li>
+              <li><a href="#" class="text-light text-decoration-none hover-underline">Contattaci</a></li>
+            </ul>
           </div>
         </div>
       </div>
 
-      <!-- Partnerships Section -->
-      <div class="col-md-4 mb-4">
-        <h5 class="text-uppercase mb-3">Le Nostre Partnership</h5>
-        <div class="d-flex justify-content-between">
-          <!-- Partnership 1 -->
-          <div class="partnership-logo">
-            <img src="https://via.placeholder.com/120x60?text=Escursioni+Trentino" alt="Escursioni Trentino" class="img-fluid">
-          </div>
-          <!-- Partnership 2 -->
-          <div class="partnership-logo">
-            <img src="https://via.placeholder.com/120x60?text=Disney+Parks" alt="Disney Parks" class="img-fluid">
-          </div>
-          <!-- Partnership 3 -->
-          <div class="partnership-logo">
-            <img src="https://via.placeholder.com/120x60?text=Parco+Zoomarine" alt="Parco Zoomarine" class="img-fluid">
-          </div>
-        </div>
-      </div>
 
-      <!-- Links Section -->
-      <div class="col-md-4 mb-4">
-        <h5 class="text-uppercase mb-3">Link Utili</h5>
-        <ul class="list-unstyled">
-          <li><a href="#" class="text-light text-decoration-none">Crediti</a></li>
-          <li><a href="#" class="text-light text-decoration-none">Privacy e Cookie</a></li>
-          <li><a href="#" class="text-light text-decoration-none">Termini di Servizio</a></li>
-          <li><a href="#" class="text-light text-decoration-none">Contattaci</a></li>
-        </ul>
-      </div>
-    </div>
 
-    <!-- Footer Bottom Section -->
-    <div class="row mt-4">
-      <div class="col-12 text-center">
-        <p class="mb-0">&copy; 2025 Prenotazioni Attività. Tutti i diritti riservati.</p>
+    <!-- Prima della chiusura del footer, aggiungi questa sezione -->
+<div class="row ">
+  <div class="col-12 text-center">
+    <div class="credits-container py-2">
+      <span class="credits-text">Sviluppato  da</span>
+      <div class="d-flex justify-content-center gap-4 mt-2">
+        <a href="#" class="credit-badge" data-name="Cosimo Bassi">
+          <span class="credit-name">Cosimo Bassi</span>
+        </a>
+        <span class="text-muted">&</span>
+        <a href="#" class="credit-badge" data-name="Mirko D'Angelo">
+          <span class="credit-name">Mirko D'Angelo</span>
+        </a>
       </div>
     </div>
   </div>
-</footer>
-
-
-
 </div>
 
-
-
-
-
-
-
+</footer>
 
 
 <!--offcanvas---->
@@ -243,7 +242,7 @@
         <div class="card" style="width: 18rem;">
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQqXAiq_Fe5Dyjb5aBLtkl7z2IyY_1bGlxeQ&s" class="card-img-top" alt="Card image">
             <div class="card-body">
-                <h5 class="card-title">Scoprire le promozion</h5>
+                <h5 class="card-title">Scoprire le promozioni</h5>
             </div>
         </div>
     </div>

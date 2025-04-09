@@ -1,7 +1,7 @@
 <?php
     $host = "localhost"; 
     $user = "root";
-    $db = "AttivitaDB";
+    $db = "attivitadb";
     $pass = "";
 
     // Connessione al database usando PDO
