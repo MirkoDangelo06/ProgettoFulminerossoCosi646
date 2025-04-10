@@ -140,7 +140,7 @@
         <!-- Sponsors Section -->
         <div class="col-md-4 mb-4">
           <div class="h-100 p-3"> <!-- Contenitore interno con padding -->
-            <h5 class="text-uppercase mb-4 border-bottom pb-2">I Nostri Sponsor</h5> <!-- Aumentato spazio e aggiunto bordo -->
+            <h5 class="text-uppercase mb-4 border-bottom pb-2">Le nostre aziende</h5> <!-- Aumentato spazio e aggiunto bordo -->
             <div class="d-flex justify-content-center gap-4"> <!-- Centratura e spazio tra logo -->
               <div class="sponsor-logo">
                 <img src="https://www.ctelift.com/wp-content/uploads/2017/07/Logo-Gardaland.jpg" alt="Gardaland" class="img-fluid rounded">
@@ -164,7 +164,7 @@
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCCiEDrmKtK__oQsJQ9SSwDFX66PM_Oursew&s" alt="Disney Parks" class="img-fluid rounded">
               </div>
               <div class="partnership-logo">
-                <img src="https://play-lh.googleusercontent.com/y_PbrLR8iRL6gAjeNhyM7GtZDVQfc-lZ_bwo-4ecmrLEObYeW6Ss0lDGUR0Yc9EvkVI8" alt="Parco Zoomarine" class="img-fluid rounded">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIh1lTg00Ml29Hk96LyP_5cK8zTG1Bl70UQQ&s" alt="Cavallino Matto" class="img-fluid rounded">
               </div>
             </div>
           </div>
