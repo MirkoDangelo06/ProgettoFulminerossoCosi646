@@ -1,3 +1,7 @@
+<?php
+ session_start();
+?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -46,11 +50,9 @@
           </a>
           <ul class="dropdown-menu">
            
-            <li><a class="dropdown-item" href="#">Per data </a></li>
+            <li><a class="dropdown-item" href="#">Nessun filtro disponibile </a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Per tipo  attività</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Per luogo</a></li>
+            
           </ul>
         </li>
       
@@ -63,6 +65,28 @@
   </div>
 </nav>
 </div>
+
+<!--footer up-->
+  <div class="bg-dark text-white py-4 mb-4 shadow">
+          <div class="container">
+            <div class="row">
+                <h5 class=" text-center mb-3">Informazioni aggiuntive su:</h5>
+                <h1 class="display-4 text-center mb-0"><?php echo htmlspecialchars( $_SESSION['username']); ?></h1>
+                <h5 class=" mt-2 text-center">(<?php echo htmlspecialchars( $_SESSION['user_name']); ?>)</h5>
+            </div>
+          </div>
+  </div>
+
+  
+  
+
+
+
+
+
+
+
+
 
 <!--button per vedere le attività-->
 <div class="w-75 mx-auto text-center mt-5 d-flex justify-content-center position-relative">  

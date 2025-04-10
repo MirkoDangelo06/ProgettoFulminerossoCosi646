@@ -101,7 +101,7 @@
       <?php  
         (include "./connessione.php");//inclusione del file di connessione
         echo '<div class="row">';//prima riga della griglia
-        $query = $conn->query("SELECT * FROM attivita");
+        $query = $conn->query("SELECT * FROM attivita join luogo on attivita.id_luogo = luogo.id_parco");
         $counter = 0;
         while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
           if ($counter % 3 == 0 && $counter != 0) { // se si sono superate le 3 card chiude la vecchia linea e ne crea una nuova
@@ -114,7 +114,7 @@
           echo '<img src="' . htmlspecialchars($row['immagine_attivita']) . '" class="card-img-top">';
           echo '    <div class="card-body">';
           echo '      <h5 class="card-title">' . htmlspecialchars($row['nome_attivita']) . '</h5>';
-          echo '      <p class="card-text">' . htmlspecialchars($row['descrizione']) . '</p>';
+          echo '      <p class="card-text">' . htmlspecialchars($row['nome_luogo']) . '</p>';
           echo '<a href="details.php?id=' . $row['id_attivita'] . '" class="btn button1">Maggiori Informazioni</a>';
           echo '    </div>';
           echo '  </div>';

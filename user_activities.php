@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'config.php'; // Il file con la connessione al DB che hai già creato
+require_once 'config.php'; 
 
 // Verifica se l'utente è loggato
 if (!isset($_SESSION['user_id'])) {
@@ -59,7 +59,7 @@ try {
         <?php endif; ?>
         
         <div class="text-center mt-4">
-            <a href="index.php" class="btn btn-primary">Torna alla home</a>
+            <a href="profile.php" class="btn btn-primary">Torna al tuo profilo</a>
         </div>
     </div>
 </body>
