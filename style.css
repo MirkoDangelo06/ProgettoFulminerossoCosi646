@@ -202,6 +202,32 @@ body {
 }
 
 
+
+
+.review-form {
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+.star-rating {
+  font-size: 24px;
+  color: #ffc107;
+  cursor: pointer;
+}
+.star-rating .bi-star {
+  color: #6c757d;
+}
+.btn-purple {
+  background-color: #6f42c1;
+  color: white;
+}
+.btn-purple:hover {
+  background-color: #5a32a3;
+  color: white;
+}
+
+
 /* Contenitore logo migliorato */
 
 .hover-underline {
@@ -333,3 +359,5 @@ body {
     opacity: 0;
   }
 }
+
+/* form profilo utente*/

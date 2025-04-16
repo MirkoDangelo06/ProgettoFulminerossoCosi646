@@ -13,6 +13,12 @@
      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
      <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+     <style>
+        .checked {
+          color: orange;
+        }
+     </style>
   </head>
   <body>
     <?php
@@ -68,6 +74,14 @@
                 echo '<strong>' . htmlspecialchars($row['username']) . '</strong>';
                 echo '<small class="text-muted">' . htmlspecialchars($row['dataRecensione']) . '</small>';
                 echo '</div>';
+                $blankStars = 5 - $row['voto'];
+                for($i = 0; $i < $row['voto']; $i++) {
+                  echo '<span class="fa fa-star checked" style="margin-right: 2px;"></span>';
+                }
+                for($i = 0; $i < $blankStars; $i++) {
+                  echo '<span class="fa fa-star" style="margin-right: 2px;"></span>';
+                }
+
                 echo '<p class="mb-0 mt-2">' . nl2br(htmlspecialchars($row['testoRecensione'])) . '</p>';
                 echo '</div>';
             }
@@ -79,6 +93,9 @@
       <div class="text-center">
         <a href="./index.php" class="btn btn-success mt-3">Torna Indietro</a>
       </div>
+
+
+
     <script>
       // Coordinate ricavate con il fetch assoc
       var latitudine = <?php echo $latitudine; ?>;

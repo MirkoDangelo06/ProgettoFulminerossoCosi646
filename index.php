@@ -193,11 +193,11 @@
       <span class="credits-text">Sviluppato  da</span>
       <div class="d-flex justify-content-center gap-4 mt-2">
         <a href="#" class="credit-badge" data-name="Cosimo Bassi">
-          <span class="credit-name">Cosimo Bassi</span>
+          <span class="credit-name">COSI646</span>
         </a>
         <span class="text-muted">&</span>
         <a href="#" class="credit-badge" data-name="Mirko D'Angelo">
-          <span class="credit-name">Mirko D'Angelo</span>
+          <span class="credit-name">Fulmine rosso_00</span>
         </a>
       </div>
     </div>
