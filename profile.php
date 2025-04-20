@@ -117,7 +117,7 @@ try {
     </div>
 </div>
 
-<!-- Main Content -->
+
 <div class="container mb-5">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -163,10 +163,10 @@ try {
                 </form>
             </div>
             
-            <!-- Pulsante per vedere le attività -->
+            <!-- Pulsante per vedere le recensioni -->
             <div class="text-center mt-5">
                 <a href="user_activities.php" class="button1 btn btn-primary">
-                    <i class="bi bi-list-check"></i> Visualizza le tue attività
+                    <i class="bi bi-list-check"></i> Visualizza le recensioni
                 </a>
             </div>
         </div>
