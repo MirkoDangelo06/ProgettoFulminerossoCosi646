@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>ProgettoInformatica</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="style.css">
     <style>
       /*font personalizzati */
@@ -25,7 +26,19 @@
         font-style: normal;
         font-weight: 250; 
       }
-    </style>
+
+    .card-dimensione-fissa {
+      width: 280px; /* o usa %, vw, ecc. */
+      height: 380px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between; /* per allineare testo e bottone */
+    }
+    .card-dimensione-fissa img {
+      height: 200px;
+      object-fit: cover;
+    }
+  </style>
   </head>
   <body class="  d-flex flex-column min-vh-100">
 
@@ -91,60 +104,75 @@
           </li>
           <?php endif; ?>
 
-            <!--filtro per regione-->
-        <form action="search.php" method="POST" class="d-flex mx-2">
-        <input type="hidden" name="tipoRicerca" value="filtroRegioni">
-        <div class="input-group ">
-          <select class="form-select form-select-sm" name="regioneSelect" aria-label="Filtra per regione">
-                <option selected value="">Scegli una regione</option>
-                <?php
-                // Esegui la query per ottenere le regioni
-                $queryRegione = $conn->query("SELECT DISTINCT locazione.regione FROM locazione ORDER BY regione ASC");              
-                while ($row = $queryRegione->fetch(PDO::FETCH_ASSOC)){
-                  echo '<option value="' . htmlspecialchars($row['regione']) . '">' . htmlspecialchars($row['regione']) . '</option>';
-                }
-                ?>
-          </select>
-          <button class="btn btn-success" type="submit">Search</button>
-        </div>
-        </form>
+                  <!-- Dropdown Filtri -->
+        <div class="ms-auto me-3">
+          <div class="dropdown">
+            <button class="btn btn-outline-light dropdown-toggle" type="button" id="filtriDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="bi bi-sliders"></i> Filtri
+            </button>
+            
+            <div class="dropdown-menu dropdown-menu-end p-3" style="min-width: 280px;" aria-labelledby="filtriDropdown">
+              <!-- Filtro Regione -->
+              <form action="search.php" method="POST" class="mb-3">
+                <input type="hidden" name="tipoRicerca" value="filtroRegioni">
+                <div class="input-group">
+                  <select class="form-select form-select-sm" name="regioneSelect" aria-label="Filtra per regione">
+                    <option selected value="">Scegli una regione</option>
+                    <?php
+                    $queryRegione = $conn->query("SELECT DISTINCT locazione.regione FROM locazione ORDER BY regione ASC");              
+                    while ($row = $queryRegione->fetch(PDO::FETCH_ASSOC)){
+                      echo '<option value="' . htmlspecialchars($row['regione']) . '">' . htmlspecialchars($row['regione']) . '</option>';
+                    }
+                    ?>
+                  </select>
+                  <button class="btn btn-success btn-sm" type="submit">
+                    <i class="bi bi-search"></i>
+                  </button>
+                </div>
+              </form>
 
-        <!--filtro per parco-->
-        <form action="search.php" method="POST" class="d-flex mx-2">
-        <input type="hidden" name="tipoRicerca" value="filtroLuoghi">
-        <div class="input-group ">
-          <select class="form-select form-select-sm" name="luoghiSelect" aria-label="Filtra per parco">
-                <option selected value="">Scegli un luogo</option>
-                <?php
-                // Esegui la query per ottenere id e nome dei luoghi  
-                $queryRegione = $conn->query("select distinct luogo.nome_luogo, luogo.id_parco from luogo ");              
-                while ($row = $queryRegione->fetch(PDO::FETCH_ASSOC)){
-                  echo '<option value="' . htmlspecialchars($row['id_parco']) . '">' . htmlspecialchars($row['nome_luogo']) . '</option>';
-                }
-                ?>
-          </select>
-          <button class="btn btn-success" type="submit">Search</button>
+              <!-- Filtro Parco-->
+              <form action="search.php" method="POST" class="mb-3">
+                <input type="hidden" name="tipoRicerca" value="filtroLuoghi">
+                <div class="input-group">
+                  <select class="form-select form-select-sm" name="luoghiSelect" aria-label="Filtra per parco">
+                    <option selected value="">Scegli un luogo</option>
+                    <?php
+                    $queryRegione = $conn->query("SELECT DISTINCT luogo.nome_luogo, luogo.id_parco FROM luogo");              
+                    while ($row = $queryRegione->fetch(PDO::FETCH_ASSOC)){
+                      echo '<option value="' . htmlspecialchars($row['id_parco']) . '">' . htmlspecialchars($row['nome_luogo']) . '</option>';
+                    }
+                    ?>
+                  </select>
+                  <button class="btn btn-success btn-sm" type="submit">
+                    <i class="bi bi-search"></i>
+                  </button>
+                </div>
+              </form>
+
+              <!-- Filtro Tipo Attività  -->
+              <form action="search.php" method="POST">
+                <input type="hidden" name="tipoRicerca" value="filtroTipo">
+                <div class="input-group">
+                  <select class="form-select form-select-sm" name="tipoSelect" aria-label="Filtra per tipo">
+                    <option selected value="">Scegli un tipo di luogo</option>
+                    <?php
+                    $queryRegione = $conn->query("SELECT DISTINCT * FROM tipo_luogo");              
+                    while ($row = $queryRegione->fetch(PDO::FETCH_ASSOC)){
+                      echo '<option value="' . htmlspecialchars($row['id_tipo']) . '">' . htmlspecialchars($row['tipo_luogo']) . '</option>';
+                    }
+                    ?>
+                  </select>
+                  <button class="btn btn-success btn-sm" type="submit">
+                    <i class="bi bi-search"></i>
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
         </div>
-        </form>
-        
-        <!--filtro per tipoAttivita-->
-        <form action="search.php" method="POST" class="d-flex mx-2">
-        <input type="hidden" name="tipoRicerca" value="filtroTipo">
-        <div class="input-group ">
-          <select class="form-select form-select-sm" name="tipoSelect" aria-label="Filtra per tipo">
-                <option selected value="">Scegli un tipo di luogo</option>
-                <?php
-                // Esegui la query per ottenere le regioni
-                $queryRegione = $conn->query("SELECT distinct * FROM tipo_luogo ");              
-                while ($row = $queryRegione->fetch(PDO::FETCH_ASSOC)){
-                  echo '<option value="' . htmlspecialchars($row['id_tipo']) . '">' . htmlspecialchars($row['tipo_luogo']) . '</option>';
-                }
-                ?>
-          </select>
-          <button class="btn btn-success" type="submit">Search</button>
-        </div>
-        </form>
-          <!--barra di ricerca-->
+
+        <!--barra di ricerca-->
         <form class="d-flex" action="search.php" method="POST">
           <input class="form-control me-2" type="search" name="valoreDaCercare" placeholder="Cosa stai cercando..." aria-label="Search" required>
           <input type="hidden" name="tipoRicerca" value="ricerca">
@@ -171,12 +199,12 @@
           
           // Genera la card con i contenuti della tabella attivita
           echo '<div class="col-md-4 mb-4 ">';
-          echo '  <div class="card " style="width: 18rem;">';
+          echo '  <div class="card card-dimensione-fissa d-flex flex-column" style="width: 18rem;">';
           echo '<img src="' . htmlspecialchars($row['immagine_attivita']) . '" class="card-img-top object-fit-cover img-fluid">';
-          echo '    <div class="card-body">';
+          echo '    <div class="card-body d-flex flex-column">';
           echo '<h5 class="card-title orbitron-bold ">' . htmlspecialchars($row['nome_attivita']) . '</h5>';
           echo '<p class="card-content inter-paragrafi">' . htmlspecialchars($row['nome_luogo']) . '</p>';
-          echo '<a href="details.php?id=' . $row['id_attivita'] . '" class="btn button2">Maggiori Informazioni</a>';
+          echo '<a href="details.php?id=' . $row['id_attivita'] . '" class="btn button2 mt-auto mb-3">Maggiori Informazioni</a>';
           echo '    </div>';
           echo '  </div>';
           echo '</div>';
