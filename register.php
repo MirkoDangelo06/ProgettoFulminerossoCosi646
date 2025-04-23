@@ -109,6 +109,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="mt-3 text-center">
                 <a href="loginPage.php" class="text-dark">Hai già un account? Accedi</a>
             </div>
+            <div class="text-center">
+                <a href="./index.php" class="btn btn-dark mt-3">continua senza account</a>
+            </div>
         </div>
     </div>
 </body>

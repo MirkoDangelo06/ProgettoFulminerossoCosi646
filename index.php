@@ -1,14 +1,31 @@
+<?php
+(include "./connessione.php");//inclusione del file di connessione
+?>
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
+    <title>ProgettoInformatica</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
+    <style>
+      /*font personalizzati */
+      @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Inter:slnt,wght@-10..0,100..900&display=swap');
 
-   
-  
+      .orbitron-bold {
+        font-family: "Orbitron", sans-serif;
+        font-weight: 500;
+      }
+
+      .inter-paragrafi {
+        font-family: "Inter", sans-serif;
+        font-optical-sizing: auto;
+        font-style: normal;
+        font-weight: 250; 
+      }
+    </style>
   </head>
   <body class="  d-flex flex-column min-vh-100">
 
@@ -27,30 +44,34 @@
 
 
   <!--VIDEO-->
+  <!--
   <div id="splash-screen">
         <video autoplay muted playsinline id="splash-video">
-            <source src="./video/intro3.mp4" type="video/mp4">
+            <source src="./video/nuovaIntro.mp4" type="video/mp4">
             Il tuo browser non supporta il tag video.
         </video>
     </div>
-
+  -->
 
  <!--navbar-->
-<div class="w-50 mx-auto">
-  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+ <div class="w-100 mx-auto">
+  <nav class="navbar navbar-expand-lg text-clear" style="background-color: #2D3748;">
     <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        <img src="./images/stoCoseDafarelogo.png"  height="80">
+      </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="index.php">Home</a>
+            <a class="nav-link active text-white" aria-current="page" href="index.php">Home</a>
           </li>
-          
+
           <?php if(!isset($_SESSION['user_id'])): ?>
           <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+            <a class="nav-link text-white" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
               Login
             </a>
           </li>
@@ -58,35 +79,76 @@
 
           <?php if(isset($_SESSION['user_id'])): ?>
           <li class="nav-item">
-            <a class="nav-link" href="profile.php" role="button">
+            <a class="nav-link text-white" href="profile.php" role="button">
               Il tuo profilo
             </a>
           </li>
           
           <li class="nav-item">
             <a class="nav-link text-danger" href="logout.php" role="button">
-              <i class="bi bi-box-arrow-right"></i> Logout
+              <i class="bi bi-box-arrow-right text-white"></i> Logout
             </a>
           </li>
           <?php endif; ?>
 
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Filtri
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Per data</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="#">Per tipo attività</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="#">Per luogo</a></li>
-            </ul>
-          </li>
-        </ul>
+            <!--filtro per regione-->
+        <form action="search.php" method="POST" class="d-flex mx-2">
+        <input type="hidden" name="tipoRicerca" value="filtroRegioni">
+        <div class="input-group ">
+          <select class="form-select form-select-sm" name="regioneSelect" aria-label="Filtra per regione">
+                <option selected value="">Scegli una regione</option>
+                <?php
+                // Esegui la query per ottenere le regioni
+                $queryRegione = $conn->query("SELECT DISTINCT locazione.regione FROM locazione ORDER BY regione ASC");              
+                while ($row = $queryRegione->fetch(PDO::FETCH_ASSOC)){
+                  echo '<option value="' . htmlspecialchars($row['regione']) . '">' . htmlspecialchars($row['regione']) . '</option>';
+                }
+                ?>
+          </select>
+          <button class="btn btn-success" type="submit">Search</button>
+        </div>
+        </form>
 
-        <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
+        <!--filtro per parco-->
+        <form action="search.php" method="POST" class="d-flex mx-2">
+        <input type="hidden" name="tipoRicerca" value="filtroLuoghi">
+        <div class="input-group ">
+          <select class="form-select form-select-sm" name="luoghiSelect" aria-label="Filtra per parco">
+                <option selected value="">Scegli un luogo</option>
+                <?php
+                // Esegui la query per ottenere id e nome dei luoghi  
+                $queryRegione = $conn->query("select distinct luogo.nome_luogo, luogo.id_parco from luogo ");              
+                while ($row = $queryRegione->fetch(PDO::FETCH_ASSOC)){
+                  echo '<option value="' . htmlspecialchars($row['id_parco']) . '">' . htmlspecialchars($row['nome_luogo']) . '</option>';
+                }
+                ?>
+          </select>
+          <button class="btn btn-success" type="submit">Search</button>
+        </div>
+        </form>
+        
+        <!--filtro per tipoAttivita-->
+        <form action="search.php" method="POST" class="d-flex mx-2">
+        <input type="hidden" name="tipoRicerca" value="filtroTipo">
+        <div class="input-group ">
+          <select class="form-select form-select-sm" name="tipoSelect" aria-label="Filtra per tipo">
+                <option selected value="">Scegli un tipo di luogo</option>
+                <?php
+                // Esegui la query per ottenere le regioni
+                $queryRegione = $conn->query("SELECT distinct * FROM tipo_luogo ");              
+                while ($row = $queryRegione->fetch(PDO::FETCH_ASSOC)){
+                  echo '<option value="' . htmlspecialchars($row['id_tipo']) . '">' . htmlspecialchars($row['tipo_luogo']) . '</option>';
+                }
+                ?>
+          </select>
+          <button class="btn btn-success" type="submit">Search</button>
+        </div>
+        </form>
+          <!--barra di ricerca-->
+        <form class="d-flex" action="search.php" method="POST">
+          <input class="form-control me-2" type="search" name="valoreDaCercare" placeholder="Cosa stai cercando..." aria-label="Search" required>
+          <input type="hidden" name="tipoRicerca" value="ricerca">
+          <button class="btn btn-success" type="submit">Search</button>
         </form>
       </div>
     </div>
@@ -99,7 +161,6 @@
   <form>  
     <div class="container"> <!-- inizio della griglia con le card delle attività -->   
       <?php  
-        (include "./connessione.php");//inclusione del file di connessione
         echo '<div class="row">';//prima riga della griglia
         $query = $conn->query("SELECT * FROM attivita join luogo on attivita.id_luogo = luogo.id_parco");
         $counter = 0;
@@ -110,12 +171,12 @@
           
           // Genera la card con i contenuti della tabella attivita
           echo '<div class="col-md-4 mb-4 ">';
-          echo '  <div class="card" style="width: 18rem;">';
-          echo '<img src="' . htmlspecialchars($row['immagine_attivita']) . '" class="card-img-top">';
+          echo '  <div class="card " style="width: 18rem;">';
+          echo '<img src="' . htmlspecialchars($row['immagine_attivita']) . '" class="card-img-top object-fit-cover img-fluid">';
           echo '    <div class="card-body">';
-          echo '      <h5 class="card-title">' . htmlspecialchars($row['nome_attivita']) . '</h5>';
-          echo '      <p class="card-text">' . htmlspecialchars($row['nome_luogo']) . '</p>';
-          echo '<a href="details.php?id=' . $row['id_attivita'] . '" class="btn button1">Maggiori Informazioni</a>';
+          echo '<h5 class="card-title orbitron-bold ">' . htmlspecialchars($row['nome_attivita']) . '</h5>';
+          echo '<p class="card-content inter-paragrafi">' . htmlspecialchars($row['nome_luogo']) . '</p>';
+          echo '<a href="details.php?id=' . $row['id_attivita'] . '" class="btn button2">Maggiori Informazioni</a>';
           echo '    </div>';
           echo '  </div>';
           echo '</div>';
@@ -134,31 +195,75 @@
 
 
 <!-- Footer Section -->
-<footer class="bg-dark text-light py-3 mt-5">
+<footer class="text-light py-3 mt-5" style="background-color: #2D3748;">
     <div class="container">
-      <div class="row g-4"> <!-- Aggiunto gutter tra le colonne -->
-        <!-- Sponsors Section -->
+      <div class="row g-4">
+        <!-- Sponsors Section - Modificata per 9 sponsor in griglia 3x3 -->
         <div class="col-md-4 mb-4">
-          <div class="h-100 p-3"> <!-- Contenitore interno con padding -->
-            <h5 class="text-uppercase mb-4 border-bottom pb-2">Le nostre aziende</h5> <!-- Aumentato spazio e aggiunto bordo -->
-            <div class="d-flex justify-content-center gap-4"> <!-- Centratura e spazio tra logo -->
-              <div class="sponsor-logo">
-                <img src="https://www.ctelift.com/wp-content/uploads/2017/07/Logo-Gardaland.jpg" alt="Gardaland" class="img-fluid rounded">
+          <div class="h-100 p-3">
+            <h5 class="text-uppercase mb-4 border-bottom pb-2">Sponsor</h5>
+            <div class="row g-3"> 
+              <!-- Prima riga -->
+              <div class="col-4 d-flex justify-content-center">
+                <div class="sponsor-logo">
+                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJ3VXnlOjUruKy3rotp8-jIbORuzTJCQIvuA&s" alt="canyon" class="img-fluid rounded">
+                </div>
               </div>
-              <div class="sponsor-logo">
-                <img src="https://www.liukdesign.net/wp-content/uploads/2023/07/wd-logo2.jpg" alt="Disneyland" class="img-fluid rounded">
+              <div class="col-4 d-flex justify-content-center">
+                <div class="sponsor-logo">
+                  <img src="https://storage.googleapis.com/media-bici-pro/1/2024/03/img_dkdec1.jpg" alt="decathlon" class="img-fluid rounded">
+                </div>
+              </div>
+              <div class="col-4 d-flex justify-content-center">
+                <div class="sponsor-logo">
+                  <img src="https://1000logos.net/wp-content/uploads/2021/04/Red-Bull-logo.png" alt="RedBull" class="img-fluid rounded">
+                </div>
+              </div>
+              
+              <!-- Seconda riga -->
+              <div class="col-4 d-flex justify-content-center">
+                <div class="sponsor-logo">
+                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRORmyrON-G7Iron3nQcC9H01C24IinMg_tcQ&s" alt="sudtirol" class="img-fluid rounded">
+                </div>
+              </div>
+              <div class="col-4 d-flex justify-content-center">
+                <div class="sponsor-logo">
+                  <img src="https://payload.cargocollective.com/1/2/69280/12934813/GoPro_Brand_Refresh_Logo_Large_4CR_v2_1280.jpg" alt="Sponsor 5" class="img-fluid rounded">
+                </div>
+              </div>
+              <div class="col-4 d-flex justify-content-center">
+                <div class="sponsor-logo">
+                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1oXqtdU1NBxtwvf4aK4IXt4nCGrHeurVMWA&s" alt="Sponsor 6" class="img-fluid rounded">
+                </div>
+              </div>
+              
+              <!-- Terza riga -->
+              <div class="col-4 d-flex justify-content-center">
+                <div class="sponsor-logo">
+                  <img src="https://cdn-cf.cms.flixbus.com/drupal-assets/ogimage/flixbus.png" alt="Sponsor 7" class="img-fluid rounded">
+                </div>
+              </div>
+              <div class="col-4 d-flex justify-content-center">
+                <div class="sponsor-logo">
+                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgEp3Ut8sF_SNNclDX6LZbYjtyLPB2jevrZQ&s" alt="Sponsor 8" class="img-fluid rounded">
+                </div>
+              </div>
+              <div class="col-4 d-flex justify-content-center">
+                <div class="sponsor-logo">
+                  <img src="https://www.itineraridicinemaedamerica.com/wp-content/uploads/2013/07/booking-com-logo.jpg" alt="Sponsor 9" class="img-fluid rounded">
+                </div>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Partnerships Section -->
+        <!-- Partnerships Section-->
         <div class="col-md-4 mb-4">
           <div class="h-100 p-3">
             <h5 class="text-uppercase mb-4 border-bottom pb-2">Le Nostre Partnership</h5>
-            <div class="d-flex justify-content-center gap-3 flex-wrap"> <!-- Flex-wrap per responsive -->
+            <div class="d-flex justify-content-center gap-3 flex-wrap">
               <div class="partnership-logo">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkcg81bScWR3PIsca4apHbd5Vf8xNp8EJKLw&s" alt="Escursioni Trentino" class="img-fluid rounded">
+                <img src="https://media.licdn.com/dms/image/v2/D4D22AQH9QUi355cI8w/feedshare-shrink_800/B4DZTKzP2zHIAg-/0/1738569220905?e=2147483647&v=beta&t=EWSyRV2CDKS27nxuAndwKGG9kB_YWDGua86qquatd_I" alt="gardaland" class="img-fluid rounded">
               </div>
               <div class="partnership-logo">
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCCiEDrmKtK__oQsJQ9SSwDFX66PM_Oursew&s" alt="Disney Parks" class="img-fluid rounded">
@@ -170,11 +275,11 @@
           </div>
         </div>
 
-        <!-- Links Section -->
+        <!-- Links Section-->
         <div class="col-md-4 mb-4">
           <div class="h-100 p-3">
             <h5 class="text-uppercase mb-4 border-bottom pb-2">Link Utili</h5>
-            <ul class="list-unstyled ps-3"> <!-- Padding sinistro -->
+            <ul class="list-unstyled ps-3">
               <li class="mb-2"><a href="#" class="text-light text-decoration-none hover-underline">Crediti</a></li>
               <li class="mb-2"><a href="#" class="text-light text-decoration-none hover-underline">Privacy e Cookie</a></li>
               <li class="mb-2"><a href="#" class="text-light text-decoration-none hover-underline">Termini di Servizio</a></li>
@@ -184,26 +289,24 @@
         </div>
       </div>
 
-
-
-    <!-- Prima della chiusura del footer, aggiungi questa sezione -->
-<div class="row ">
-  <div class="col-12 text-center">
-    <div class="credits-container py-2">
-      <span class="credits-text">Sviluppato  da</span>
-      <div class="d-flex justify-content-center gap-4 mt-2">
-        <a href="#" class="credit-badge" data-name="Cosimo Bassi">
-          <span class="credit-name">COSI646</span>
-        </a>
-        <span class="text-muted">&</span>
-        <a href="#" class="credit-badge" data-name="Mirko D'Angelo">
-          <span class="credit-name">Fulmine rosso_00</span>
-        </a>
+      <!-- Credits Section (invariata) -->
+      <div class="row">
+        <div class="col-12 text-center">
+          <div class="credits-container py-2">
+            <span class="credits-text">Sviluppato da</span>
+            <div class="d-flex justify-content-center gap-4 mt-2">
+              <a href="#" class="credit-badge" data-name="Cosimo Bassi">
+                <span class="credit-name">COSI646</span>
+              </a>
+              <span class="text-muted">&</span>
+              <a href="#" class="credit-badge" data-name="Mirko D'Angelo">
+                <span class="credit-name">Fulmine rosso_00</span>
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
-
 </footer>
 
 

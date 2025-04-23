@@ -30,6 +30,7 @@
             $longitudine = $row['longitudine']; 
             // Generalità dell'attività
             $nomeAttivita = $row['nome_attivita'];
+            $descrizioneAttivita = $row['descrizione'];
         } else {
             // Gestisci l'errore (es. nessun risultato trovato)
             echo "Nessuna Recensione trovata per questa attività";
@@ -44,6 +45,11 @@
                 <h1 class="display-4 text-center mb-0"><?php echo htmlspecialchars($nomeAttivita); ?></h1>
             </div>
           </div>
+    </div>
+    <div class="w-50 text-center mx-auto my-auto">
+        <?php
+          echo '<p>' . $descrizioneAttivita . '</p>'
+        ?>
     </div>
     <!-- Mostra la mappa -->
     <div class="row mb-5">
