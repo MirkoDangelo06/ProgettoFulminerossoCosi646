@@ -169,6 +169,12 @@ try {
                     <i class="bi bi-list-check"></i> Visualizza le tue attività
                 </a>
             </div>
+            <!-- Pulsante per vedere le recensioni effettuate -->
+            <div class="text-center mt-5">
+                <a href="userReviews.php" class="button1 btn btn-primary">
+                    <i class="bi bi-list-check"></i> Visualizza le recensioni
+                </a>
+            </div>
         </div>
     </div>
 </div>

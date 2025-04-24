@@ -1,4 +1,5 @@
 <?php
+    session_start();
     include "./connessione.php";
 ?>
 <!doctype html>
@@ -7,6 +8,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>dettagli-attività</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <!--leaflet!-->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
@@ -15,6 +17,18 @@
      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
      <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:slnt,wght@-10..0,100..900&display=swap');
+        .orbitron-bold {
+          font-family: "Orbitron", sans-serif;
+          font-weight: 500;
+        }
+        .inter-paragrafi {
+          font-family: "Inter", sans-serif;
+          font-optical-sizing: auto;
+          font-style: normal;
+          font-weight: 250; 
+        }
         .checked {
           color: orange;
         }
@@ -41,8 +55,8 @@
     <div class="bg-dark text-white py-4 mb-4 shadow">
           <div class="container">
             <div class="row">
-                <h5 class=" text-center mb-3">Informazioni aggiuntive su:</h5>
-                <h1 class="display-4 text-center mb-0"><?php echo htmlspecialchars($nomeAttivita); ?></h1>
+                <h5 class=" text-center mb-3 inter-paragrafi">Informazioni aggiuntive su:</h5>
+                <h1 class="display-4 text-center mb-0 orbitron-bold"><?php echo htmlspecialchars($nomeAttivita); ?></h1>
             </div>
           </div>
     </div>
@@ -96,6 +110,46 @@
         }
         ?>
       </div>
+      <?php
+        if (isset($_SESSION['user_id'])) {
+          $idUser = $_SESSION['user_id'];
+          $stmt = $conn->prepare("SELECT * FROM interesse_attivita WHERE id_persona = :idUser AND id_attivita = :id_attivita");
+          $stmt->execute([
+              ':idUser' => $idUser,
+              ':id_attivita' => $id_attivita
+          ]);
+
+          if ($stmt->fetch()) {
+            echo '
+            <div class="text-center">
+              <form action="insert-Interest.php" method="POST" class="mt-3">
+                  <input type="hidden" name="id_Attivita" value="'.$id_attivita.'">
+                  <input type="hidden" name="idUser" value="'.$idUser.'">
+                  <input type="hidden" name="tipoAzione" value="remove">                            
+                  <button type="submit" class="btn btn-danger btn-lg">
+                  <i class="bi bi-trash"></i>
+                  <span>Rimuovi dalla whishlist</span>
+                  </button>
+              </form>
+            <div>
+            ';
+          } else {
+            echo '
+            <div class="text-center">
+              <form action="insert-Interest.php" method="POST" class="mt-3">
+                  <input type="hidden" name="id_Attivita" value="'.$id_attivita.'">
+                  <input type="hidden" name="tipoAzione" value="add">  
+                  <input type="hidden" name="idUser" value="'.$idUser.'">                      
+                  <button type="submit" class="btn btn-primary btn-lg">
+                      <i class="bi bi-list-task mb-5"></i>
+                      <span>Aggiungi alla whishlist</span>
+                  </button>
+              </form>
+            <div>
+            ';
+          }
+        }
+      ?>
       <div class="text-center">
         <a href="./index.php" class="btn btn-success mt-3">Torna Indietro</a>
       </div>

@@ -104,7 +104,7 @@
           </li>
           <?php endif; ?>
 
-                  <!-- Dropdown Filtri -->
+        <!-- Dropdown Filtri -->
         <div class="ms-auto me-3">
           <div class="dropdown">
             <button class="btn btn-outline-light dropdown-toggle" type="button" id="filtriDropdown" data-bs-toggle="dropdown" aria-expanded="false">
