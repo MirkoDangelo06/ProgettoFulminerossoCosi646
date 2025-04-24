@@ -70,9 +70,9 @@ body {
     align-items: center;
     position: relative;
     padding: 0.6em 2em;
-    border: mediumspringgreen solid 0.15em;
+    border: rgb(1, 62, 38) solid 0.15em;
     border-radius: 0.25em;
-    color: mediumspringgreen;
+    color: rgb(10, 48, 33);
     font-size: 1.5em;
     font-weight: 600;
     cursor: pointer;
@@ -91,7 +91,7 @@ body {
   }
   
   .button1:active {
-    border-color: teal;
+    border-color: rgb(17, 39, 25);
   }
   
   .button1::after, .button1::before {
@@ -99,7 +99,7 @@ body {
     position: absolute;
     width: 9em;
     aspect-ratio: 1;
-    background: mediumspringgreen;
+    background: rgb(10, 48, 33);
     opacity: 50%;
     border-radius: 50%;
     transition: transform 800ms;
@@ -125,7 +125,7 @@ body {
   
   .button1:active:before,
   .button1:active:after {
-    background: teal;
+    background: rgb(17, 39, 25);
   }
 
 
@@ -187,7 +187,6 @@ body {
     transform: translateY(0);
     box-shadow: inset 2px 2px 4px #1b5e20; /* Ombra verde scuro */
   }
-  
 /*immagini footer*/
 
 .sponsor-logo img, 

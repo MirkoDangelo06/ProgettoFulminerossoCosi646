@@ -73,56 +73,78 @@ try {
 </head>
 <body class="d-flex flex-column min-vh-100">
 
-<!--navbar-->
-<div class="w-50 mx-auto">
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
-<div class="container-fluid">
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+<div class="w-100 mx-auto">
+  <nav class="navbar navbar-expand-lg text-clear" style="background-color: #2D3748;">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        <img src="./images/stoCoseDafarelogo.png"  height="80">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-                <a class="nav-link" href="./index.php">Home</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active" href="./profile.php">Profilo</a>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Filtri
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Nessun filtro disponibile</a></li>
-                </ul>
-            </li>
-        </ul>
-        <form class="d-flex" role="search">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
+          <li class="nav-item">
+            <a class="nav-link active text-white" aria-current="page" href="index.php">Home</a>
+          </li>
+
+          <?php if(!isset($_SESSION['user_id'])): ?>
+          <li class="nav-item">
+            <a class="nav-link text-white" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+              Login
+            </a>
+          </li>
+          <?php endif; ?>
+
+          <?php if(isset($_SESSION['user_id'])): ?>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="profile.php" role="button">
+              Il tuo profilo
+            </a>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link text-danger" href="logout.php" role="button">
+              <i class="bi bi-box-arrow-right text-white"></i> Logout
+            </a>
+          </li>
+          <?php endif; ?>
+
+        
+
+        <!--barra di ricerca-->
+        <form class="d-flex" action="search.php" method="POST">
+          <input class="form-control me-2" type="search" name="valoreDaCercare" placeholder="Cosa stai cercando..." aria-label="Search" required>
+          <input type="hidden" name="tipoRicerca" value="ricerca">
+          <button class="btn btn-success" type="submit">Search</button>
         </form>
+      </div>
     </div>
-</div>
-</nav>
+  </nav>
 </div>
 
 <!--footer up-->
-<div class="bg-dark text-white py-4 mb-4 shadow">
-    <div class="container">
-        <div class="row">
-            <h5 class="text-center mb-3">Informazioni aggiuntive su:</h5>
-            <h1 class="display-4 text-center mb-0"><?php echo htmlspecialchars($_SESSION['username']); ?></h1>
-            <h5 class="mt-2 text-center">(<?php echo htmlspecialchars($_SESSION['user_name']); ?>)</h5>
+
+    <div class="text-white py-4 mb-4"  style="background-color: #2D3748;">
+    <div class="w-75 mx-auto rounded-5 bg-dark">
+        <div class="container">
+            <div class="row">
+                <h5 class="text-center mb-3 pt-3 pb-2">Informazioni aggiuntive su:</h5>
+                <h1 class="display-4 text-center mb-0"><?php echo htmlspecialchars($_SESSION['username']); ?></h1>
+                
+                <h5 class="mt-3 text-center pb-3">(<?php echo htmlspecialchars($_SESSION['user_name']); ?>)</h5>
+                
+            </div>
         </div>
     </div>
 </div>
 
 <!-- Main Content -->
-<div class="container mb-5">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
+<div class="container mb-5" >
+    <div class="row justify-content-center"  >
+        <div class="col-md-8"  >
             <!-- Form per recensione -->
-            <div class="review-form mb-5">
+            <div class="review-form mb-5"style="background-color:rgba(209, 210, 200, 0.75);" >
                 <h3 class="mb-4 text-center"><i class="bi bi-pencil-square"></i> Lascia una recensione</h3>
                 
                 <?php if (isset($success_message)): ?>
@@ -159,7 +181,7 @@ try {
                         <textarea class="form-control" id="testoRecensione" name="testoRecensione" rows="3" required></textarea>
                     </div>
                     
-                    <button type="submit" name="submit_review" class="btn btn-purple w-100">Invia Recensione</button>
+                    <button type="submit" name="submit_review" class="btn w-100 rounded-pill text-light" style="background-color: #2D3748;">Invia Recensione</button>
                 </form>
             </div>
             
