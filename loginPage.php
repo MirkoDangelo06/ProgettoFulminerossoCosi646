@@ -42,8 +42,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
     <div class="container">
         <div class="login-box">
-            <h2 class="text-center mb-4">Accedi</h2>
             
+            <h2 class="text-center mb-4">Accedi</h2>
+        
             <?php if ($error): ?>
                 <div class="alert alert-danger"><?= htmlspecialchars($error) ?></div>
             <?php endif; ?>
@@ -57,14 +58,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <label class="form-label">Password</label>
                     <input type="password" name="password" class="form-control" required>
                 </div>
-                <button type="submit" class="btn btn-dark w-100">Accedi</button>
+                <button type="submit" class="btn w-100" style="background-color: #0d5c26; color: white;">Accedi</button>
             </form>
             
             <div class="mt-3 text-center">
                 <a href="register.php" class="text-dark">Crea un account</a>
             </div>
             <div class="text-center">
-                <a href="./index.php" class="btn btn-dark mt-3">continua senza account</a>
+                <a href="./index.php" class="btn mt-3"style="background-color: #0d5c26; color: white;">continua senza account</a>
             </div>
         </div>
     </div>

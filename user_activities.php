@@ -82,7 +82,7 @@ echo '</div>';
 ?>
         
         <div class="text-center mt-4">
-            <a href="profile.php" class="btn btn-primary">Torna al tuo profilo</a>
+            <a href="profile.php" class="btn" style="background-color: #0d5c26; color: white;">Torna al tuo profilo</a>
         </div>
     </div>
 </body>

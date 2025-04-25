@@ -338,60 +338,88 @@
 </footer>
 
 
-<!--offcanvas---->
+<!-- Offcanvas -->
 <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
-  <div class="offcanvas-header">
-    <h5 class="offcanvas-title me-5" id="offcanvasExampleLabel"> pagina di Login</h5>
-    <a href="./loginPage.php" class="btn btn-outline-secondary ms-3">Login</a>
   
-    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  <div class="offcanvas-header " style="background-color:#2D3748;">
+      <h3 class="offcanvas-title me-5 orbitron-bold text-white mb-3" id="offcanvasExampleLabel">Explore</h3>
+      <p class="text-white-50 mb-0 inter-paragrafi">Scopri il mondo delle esperienze</p>
+      <br>    
   </div>
-  <hr>
-  <div class="offcanvas-body">
-    <div>
-     <p>La nostra vision: creare il sito di informazione e prenotazione eventi più famoso e conosciuto,
-        scopri chi siamo e dove vogliamo arrivare: 
-     </p> 
-     <hr>
-    </div>
-    <div class="dropdown mt-3">
-      <!-- Card 1 -->
-      <div class="col-md-4 mt-5">
-        <div class="card" style="width: 18rem;">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSq3PCoO2a-Bp_8rpEqJ7yaxvMNfVWt6eAEKA&s" class="card-img-top" alt="Card image">
-            <div class="card-body">
-                <h5 class="card-title">Essere sempre aggiornati</h5>
-               
-            </div>
-        </div>
-    </div>
+    <button type="button" class="btn-close btn-close-white mb-3" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+ 
+  
 
-    <hr>
+  <div class="offcanvas-body" style="background-color: #f8f9fa;">
+ 
+    <div class="text-center mb-4">
+      <div class="position-relative mb-3">
+        <span class="position-absolute top-0 start-50 translate-middle px-3  bg-success text-white rounded-pill orbitron-bold" style="font-size: 0.8rem;">LA NOSTRA VISION</span>
+      </div>
+      <p class="lead inter-paragrafi mt-5 pt-5" style="color: #2D3748;">
+        Creiamo il punto di riferimento per scoprire e prenotare le migliori esperienze outdoor in Italia
+      </p>
+      <hr class="w-50 mx-auto" style="border-top: 2px solid #0a3021;">
+    </div>
+    
+
+    <div class="row g-4">
+      <!-- Card 1 -->
+      <div class="col-12">
+        <div class="card card-hover-effect border-0 shadow-sm h-100">
+          <div class="card-img-container overflow-hidden">
+            <img src="https://www.exodus.it/assets/img/NEWS.jpg" class="card-img-top" alt="Aggiornamenti">
+          </div>
+          <div class="card-body text-center">
+            <h5 class="card-title orbitron-bold text-success">Essere sempre aggiornati</h5>
+            <p class="card-text inter-paragrafi">Le ultime novità e eventi direttamente sul tuo profilo</p>
+          </div>
+          <div class="card-footer bg-transparent border-0 text-center pb-3">
+            <a href="./loginPage.php" class="btn button2 btn-sm">Accedi</a>
+          </div>
+        </div>
+      </div>
 
       <!-- Card 2 -->
-      <div class="col-md-4 mt-3">
-        <div class="card" style="width: 18rem;">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQqXAiq_Fe5Dyjb5aBLtkl7z2IyY_1bGlxeQ&s" class="card-img-top" alt="Card image">
-            <div class="card-body">
-                <h5 class="card-title">Scoprire le promozioni</h5>
-            </div>
+      <div class="col-12">
+        <div class="card card-hover-effect border-0 shadow-sm h-100">
+          <div class="card-img-container overflow-hidden">
+            <img src="https://www.buyersline.it/wp-content/uploads/2024/06/Miniatura_art106-930x620.png" class="card-img-top" alt="Promozioni">
+          </div>
+          <div class="card-body text-center">
+            <h5 class="card-title orbitron-bold text-success">Scoprire le promozioni</h5>
+            <p class="card-text inter-paragrafi">Sconti esclusivi e offerte speciali per i nostri utenti</p>
+          </div>
+          <div class="card-footer bg-transparent border-0 text-center pb-3">
+            <a href="./loginPage.php" class="btn button2 btn-sm">Accedi</a>
+          </div>
         </div>
-    </div>
-
-    <hr>
+      </div>
 
       <!-- Card 3 -->
-      <div class="col-md-4 mt-3">
-        <div class="card" style="width: 18rem;">
-            <img src="https://img.freepik.com/foto-gratuito/bambini-che-giocano-su-erba_1098-504.jpg" class="card-img-top" alt="Card image">
-            <div class="card-body">
-                <h5 class="card-title">Anche per i piu piccoli</h5>
-           
-            </div>
+      <div class="col-12">
+        <div class="card card-hover-effect border-0 shadow-sm h-100">
+          <div class="card-img-container overflow-hidden">
+            <img src="https://img.freepik.com/foto-gratuito/bambini-che-giocano-su-erba_1098-504.jpg" class="card-img-top" alt="Bambini">
+          </div>
+          <div class="card-body text-center">
+            <h5 class="card-title orbitron-bold text-success">Anche per i più piccoli</h5>
+            <p class="card-text inter-paragrafi">Attività family-friendly per divertirsi in tutta sicurezza</p>
+          </div>
+          <div class="card-footer bg-transparent border-0 text-center pb-3">
+            <a href="./loginPage.php" class="btn button2 btn-sm">Accedi</a>
+          </div>
         </div>
+      </div>
     </div>
+    
+    <!-- Call to action in fondo -->
+    <div class="text-center mt-4">
+      <p class="inter-paragrafi">Non hai ancora un account?</p>
+      <a href="./register.php" class="btn btn-outline-success">Registrati ora</a>
     </div>
   </div>
+</div>
 
                                                                                                                              
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
