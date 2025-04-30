@@ -40,7 +40,7 @@
     }
   </style>
   </head>
-  <body class="  d-flex flex-column min-vh-100">
+  <body class="  d-flex flex-column min-vh-100" style="background-color:#f3f5f6;">
 
 <!--errore logout-->
   <?php
@@ -57,21 +57,17 @@
 
 
   <!--VIDEO-->
-  <!--
   <div id="splash-screen">
-        <video autoplay muted playsinline id="splash-video">
-            <source src="./video/nuovaIntro.mp4" type="video/mp4">
-            Il tuo browser non supporta il tag video.
-        </video>
-    </div>
-  -->
-
- <!--navbar-->
- <div class="w-100 mx-auto">
+    <video autoplay muted playsinline id="splash-video">
+        <source src="./video/explore.mp4" type="video/mp4">
+        Il tuo browser non supporta il tag video.
+    </video>
+  </div>
+  <div class="w-100 mx-auto">
   <nav class="navbar navbar-expand-lg text-clear" style="background-color: #2D3748;">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">
-        <img src="./images/stoCoseDafarelogo.png"  height="80">
+        <img src="./images/stoCoseDafarelogo.png" height="80">
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -103,12 +99,14 @@
             </a>
           </li>
           <?php endif; ?>
-
-        <!-- Dropdown Filtri -->
-        <div class="ms-auto me-3">
-          <div class="dropdown">
+        </ul>
+        
+        <!-- Elementi allineati a destra -->
+        <div class="d-flex align-items-center">
+          <!-- Dropdown Filtri -->
+          <div class="dropdown me-3">
             <button class="btn btn-outline-light dropdown-toggle" type="button" id="filtriDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-              <i class="bi bi-sliders"></i> Filtri
+              <i class="bi bi-sliders"></i> Ordina
             </button>
             
             <div class="dropdown-menu dropdown-menu-end p-3" style="min-width: 280px;" aria-labelledby="filtriDropdown">
@@ -170,20 +168,19 @@
               </form>
             </div>
           </div>
-        </div>
 
-        <!--barra di ricerca-->
-        <form class="d-flex" action="search.php" method="POST">
-          <input class="form-control me-2" type="search" name="valoreDaCercare" placeholder="Cosa stai cercando..." aria-label="Search" required>
-          <input type="hidden" name="tipoRicerca" value="ricerca">
-          <button class="btn btn-success" type="submit">Search</button>
-        </form>
+          <!--barra di ricerca-->
+          <form class="d-flex" action="search.php" method="POST">
+            <input class="form-control me-2" type="search" name="valoreDaCercare" placeholder="Cosa stai cercando..." aria-label="Search" required>
+            <input type="hidden" name="tipoRicerca" value="ricerca">
+            <button class="btn btn-success" type="submit">Search</button>
+          </form>
+        </div>
       </div>
     </div>
   </nav>
 </div>
-
-
+ 
 <!--grid-->
 <div class="mt-5 w-75 mx-auto my-auto">
   <form>  
@@ -218,7 +215,63 @@
 </div><!-- chiusura del div principale -->
 
 
-
+<!-- Carousel delle attrazioni -->
+<div class="container-fluid px-0 mt-5">
+  <div class="orbitron-bold text-center mb-4">
+    <h2>Scopri le nostre attrazioni</h2>
+    <div class="position-relative">
+      <span class="position-absolute top-0 start-50 translate-middle px-3 bg-success text-white rounded-pill" style="font-size: 0.8rem;">IN EVIDENZA</span>
+    </div>
+  </div>
+  
+  <div id="attractionsCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <?php
+      $queryAttrazioni = $conn->query("SELECT * FROM attivita ORDER BY RAND() LIMIT 6");
+      $active = true;
+      $counter = 0;
+      
+      while ($row = $queryAttrazioni->fetch(PDO::FETCH_ASSOC)) {
+        if ($counter % 3 == 0) {
+          echo $active ? '<div class="carousel-item active">' : '<div class="carousel-item">';
+          echo '<div class="row g-4 justify-content-center">';
+          $active = false;
+        }
+        
+        echo '
+        <div class="col-md-4">
+          <div class="card h-100 border-0 shadow-sm overflow-hidden">
+            <div class="card-img-top-container" style="height: 200px; overflow: hidden;">
+              <img src="'.htmlspecialchars($row['immagine_attivita']).'" class="img-fluid w-100 h-100 object-fit-cover" alt="'.htmlspecialchars($row['nome_attivita']).'">
+            </div>
+            <div class="card-body">
+              <h5 class="card-title orbitron-bold">'.htmlspecialchars($row['nome_attivita']).'</h5>
+              <p class="card-text inter-paragrafi">'.substr(htmlspecialchars($row['descrizione']), 0, 100).'...</p>
+            </div>
+            <div class="card-footer bg-transparent border-0">
+              <a href="details.php?id='.$row['id_attivita'].'" class="btn button2 stretched-link">Scopri di più</a>
+            </div>
+          </div>
+        </div>';
+        
+        if ($counter % 3 == 2 || $counter == $queryAttrazioni->rowCount() - 1) {
+          echo '</div></div>';
+        }
+        $counter++;
+      }
+      ?>
+    </div>
+    
+    <button class="carousel-control-prev" type="button" data-bs-target="#attractionsCarousel" data-bs-slide="prev" style="width: 5%;">
+      <span class="carousel-control-prev-icon bg-dark rounded-circle p-3" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#attractionsCarousel" data-bs-slide="next" style="width: 5%;">
+      <span class="carousel-control-next-icon bg-dark rounded-circle p-3" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+</div>
 
 
 

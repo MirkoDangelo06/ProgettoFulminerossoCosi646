@@ -11,11 +11,11 @@ if (!isset($_SESSION['user_id'])) {
 // Recupera le recensioni dell'utente con i dettagli delle attività
 try {
     $stmt = $pdo->prepare("
-    SELECT r.*, a.nome_attivita, a.immagine_attivita, a.descrizione 
-    FROM RECENSIONE r
-    JOIN ATTIVITA a ON r.id_attivita = a.id_attivita
-    WHERE r.id_persona = :user_id
-    ORDER BY r.dataRecensione DESC
+        SELECT r.*, a.nome_attivita, a.immagine_attivita, a.descrizione 
+        FROM RECENSIONE r
+        JOIN ATTIVITA a ON r.id_attivita = a.id_attivita
+        WHERE r.id_persona = :user_id
+        ORDER BY r.dataRecensione DESC
     ");
     $stmt->execute(['user_id' => $_SESSION['user_id']]);
     $reviews = $stmt->fetchAll();

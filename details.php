@@ -34,7 +34,7 @@
         }
      </style>
   </head>
-  <body>
+  <body style="background-color:#f3f5f6;">
     <?php
         $id_attivita = $_GET['id'];
         $query = $conn->query("SELECT * FROM attivita JOIN luogo ON luogo.id_parco = attivita.id_luogo JOIN locazione ON locazione.id_locazione = luogo.id_parco where attivita.id_attivita = '$id_attivita'");
@@ -88,7 +88,27 @@
             WHERE attivita.id_attivita = '$id_attivita'");
 
         if ($query2 && $query2->rowCount() > 0) {
-            while ($row = $query2->fetch(PDO::FETCH_ASSOC)) {
+          $queryMediaVoti = $conn->query("SELECT avg(recensione.voto) as mediaVoti from recensione where recensione.id_attivita = '$id_attivita'");
+          echo '<div class="d-flex align-items-center">';// contenitore della media
+          echo '<h3 class="mb-0 mx-3 ">Media Voti:</h3>'; // mb-0 per togliere margine sotto, mr-2 per margine a destra
+          while ($row = $queryMediaVoti->fetch(PDO::FETCH_ASSOC)) {
+              $media = $row['mediaVoti'];
+              $mediaArrotondata = round($media); // Arrotonda correttamente (0.5 arrotonda per eccesso)
+              
+              // Oppure, per mostrare mezze stelle:
+              // $stellePiene = floor($media); // Parte intera
+              // $hasMezzaStella = ($media - $stellePiene) >= 0.5; // Verifica se c'è una mezza stella
+              
+              for ($i = 1; $i <= 5; $i++) {
+                  if ($i <= $mediaArrotondata) {
+                      echo '<span class="fa fa-star checked mt-2" style="margin-right: 2px;"></span>';
+                  } else {
+                      echo '<span class="fa fa-star mt-2" style="margin-right: 2px;"></span>';
+                  }
+              }
+          } 
+          echo '</div>';         
+          while ($row = $query2->fetch(PDO::FETCH_ASSOC)) {
                 echo '<div class="mb-3 p-3 bg-light rounded">';
                 echo '<div class="d-flex justify-content-between">';
                 echo '<strong>' . htmlspecialchars($row['username']) . '</strong>';

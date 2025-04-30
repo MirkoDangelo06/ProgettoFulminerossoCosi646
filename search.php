@@ -26,7 +26,7 @@
       }
     </style>
   </head>
-  <body>
+  <body style="background-color:#f3f5f6;">
 <div class="text-center">
 <!--navbar estesa per la modalità ricerca-->
  <div class="w-100 mx-auto">
@@ -51,7 +51,7 @@
         <div class="ms-auto me-3">
           <div class="dropdown">
             <button class="btn btn-outline-light dropdown-toggle" type="button" id="filtriDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-              <i class="bi bi-sliders"></i> Filtri
+              <i class="bi bi-sliders"></i> Ordina
             </button>
             
             <div class="dropdown-menu dropdown-menu-end p-3" style="min-width: 280px;" aria-labelledby="filtriDropdown">

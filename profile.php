@@ -71,7 +71,7 @@ try {
         }
     </style>
 </head>
-<body class="d-flex flex-column min-vh-100">
+<body class="d-flex flex-column min-vh-100" style="background-color:#f3f5f6;">
 
 <div class="w-100 mx-auto">
   <nav class="navbar navbar-expand-lg text-clear" style="background-color: #2D3748;">
@@ -124,8 +124,8 @@ try {
 </div>
 
 <!--footer up-->
-
-    <div class="text-white py-4 mb-4"  style="background-color: #2D3748;">
+            <br>
+    <div class="text-white py-4 mb-4"  style="">
     <div class="w-75 mx-auto rounded-5 bg-dark">
         <div class="container">
             <div class="row">
