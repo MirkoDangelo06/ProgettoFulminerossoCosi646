@@ -174,7 +174,59 @@
 <!--controllo sessione e possibilità di lasciare commento-->
 
 
+<br>
+<br>
+<?php
+      //$id_attivita
+        //PER INVIARE UNA RECENSIONE DALLA PAGINA DETAILS 
+          if (isset($_SESSION['user_id'])) { //controlla se l'utente è loggato, se è loggato mostra i pulsanti
+            $idUser = $_SESSION['user_id'];
+            echo '<div class="review-form mb-5 w-50 mx-auto my-auto"style="background-color:rgba(209, 210, 200, 0.75);" >
+                <h3 class="mb-4 text-center"><i class="bi bi-pencil-square"></i> Lascia una recensione</h3>
+                <form method="POST" action="profile.php">      
+                    <div class="mb-3">
+                        <label class="form-label">Voto</label>
+                        <div class="star-rating">
+                            <input type="hidden" name="voto" id="rating-value" required>
+                            <i class="bi bi-star" data-rating="1"></i>
+                            <i class="bi bi-star" data-rating="2"></i>
+                            <i class="bi bi-star" data-rating="3"></i>
+                            <i class="bi bi-star" data-rating="4"></i>
+                            <i class="bi bi-star" data-rating="5"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="testoRecensione" class="form-label">Recensione</label>
+                        <textarea class="form-control" id="testoRecensione" name="testoRecensione" rows="3" ></textarea>
+                    </div>
+                    <input type="hidden" name="attivita_id" id="attivita_id" value="'.$id_attivita.'">
+                    <button type="submit" name="submit_review" class="btn w-100 rounded-pill text-light" style="background-color: #2D3748;">Invia Recensione</button>
+                </form>
+            </div>';
+          }
+      ?>
 
+<br>
+
+<div class="text-center">
+        <?php
+        //PER MOSTRARE IL PULSANTE CHE INDIRIZZA L'UTENTE AL SITO WEB DEL PARCO
+        $queryLink = $conn->query("SELECT DISTINCT * FROM luogo JOIN attivita ON attivita.id_luogo = luogo.id_parco WHERE attivita.id_attivita = '$id_attivita'");
+        while ($row = $queryLink->fetch(PDO::FETCH_ASSOC)) {
+            // Verifica se il link esiste 
+            if (!empty($row['link_sito'])) {
+                echo '<a href="' . htmlspecialchars($row['link_sito']) . '" 
+                      class="btn btn-lg btn-dark mt-3" 
+                      target="_blank"><i class="bi bi-map"></i> Informazioni aggiuntive sul parco</a>';
+            } else {
+                // se il link non esiste
+                echo '<button class="btn btn-lg btn-secondary mt-3" disabled>Link non disponibile</button>';
+            }
+        }
+      ?>
+    </div>
+<br>
 
       <div class="text-center">
         <a href="./index.php" class="btn btn-success mt-3">Torna Indietro</a>
@@ -203,6 +255,27 @@
           .openPopup();
     </script>
 
+
+<script>
+    // Sistema di valutazione a stelle
+    document.querySelectorAll('.star-rating i').forEach(star => {
+        star.addEventListener('click', function() {
+            const rating = this.getAttribute('data-rating');
+            document.getElementById('rating-value').value = rating;
+            
+            // Aggiorna l'aspetto delle stelle
+            document.querySelectorAll('.star-rating i').forEach(s => {
+                if (s.getAttribute('data-rating') <= rating) {
+                    s.classList.remove('bi-star');
+                    s.classList.add('bi-star-fill');
+                } else {
+                    s.classList.remove('bi-star-fill');
+                    s.classList.add('bi-star');
+                }
+            });
+        });
+    });
+</script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   </body>
