@@ -73,6 +73,7 @@ try {
 </head>
 <body class="d-flex flex-column min-vh-100" style="background-color:#f3f5f6;">
 
+<!--navbar-->
 <div class="w-100 mx-auto">
   <nav class="navbar navbar-expand-lg text-clear" style="background-color: #2D3748;">
     <div class="container-fluid">

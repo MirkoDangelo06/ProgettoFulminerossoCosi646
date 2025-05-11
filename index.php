@@ -63,6 +63,9 @@
         Il tuo browser non supporta il tag video.
     </video>
   </div>
+
+
+  <!--navbar-->
   <div class="w-100 mx-auto">
   <nav class="navbar navbar-expand-lg text-clear" style="background-color: #2D3748;">
     <div class="container-fluid">
@@ -92,6 +95,15 @@
               Il tuo profilo
             </a>
           </li>
+
+
+          <?php if(isset($_SESSION['is_admin']) && $_SESSION['is_admin']): ?>
+              <li class="nav-item">
+                  <a class="nav-link text-white" href="admin.php" role="button">
+                      Pannello Admin
+                  </a>
+              </li>
+          <?php endif; ?>
           
           <li class="nav-item">
             <a class="nav-link text-danger" href="logout.php" role="button">

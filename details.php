@@ -168,8 +168,14 @@
             <div>
             ';
           }
+
         }
       ?>
+<!--controllo sessione e possibilità di lasciare commento-->
+
+
+
+
       <div class="text-center">
         <a href="./index.php" class="btn btn-success mt-3">Torna Indietro</a>
       </div>
