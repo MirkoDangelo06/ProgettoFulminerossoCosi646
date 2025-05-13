@@ -99,37 +99,50 @@ try {
 
     <div class="container mt-5">
        
-        <?php if (empty($reviews)): ?>
-            <div class="alert alert-info no-reviews">
-                <i class="bi bi-chat-square-text" style="font-size: 2rem;"></i>
-                <p class="mt-3">Non hai ancora lasciato nessuna recensione.</p>
-                <a href="profile.php" class="btn btn-primary mt-2">Lascia una recensione</a>
-            </div>
-        <?php else: ?>
-            <div class="row">
-                <?php foreach ($reviews as $review): ?>
-                    <div class="col-md-6">
-                        <div class="card review-card h-100">
-                            <img src="<?= htmlspecialchars($review['immagine_attivita']) ?>" class="card-img-top activity-img" alt="<?= htmlspecialchars($review['nome_attivita']) ?>">
-                            <div class="card-body">
-                                <h4 class="card-title"><?= htmlspecialchars($review['nome_attivita']) ?></h4>
-                                <div class="star-rating">
-                                    <?php for ($i = 1; $i <= 5; $i++): ?>
-                                        <i class="bi bi-star<?= $i <= $review['voto'] ? '-fill' : '' ?>"></i>
-                                    <?php endfor; ?>
-                                    <span class="ms-2"><?= $review['voto'] ?>/5</span>
-                                </div>
-                                <p class="card-text"><?= nl2br(htmlspecialchars($review['testoRecensione'])) ?></p>
-                                <p class="review-date">
-                                    <i class="bi bi-calendar"></i> 
-                                    <?= date('d/m/Y', strtotime($review['dataRecensione'])) ?>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                <?php endforeach; ?>
-            </div>
-        <?php endif; ?>
+    <?php
+if (empty($reviews)) {
+    echo '<div class="alert alert-info no-reviews">';
+    echo '<i class="bi bi-chat-square-text" style="font-size: 2rem;"></i>';
+    echo '<p class="mt-3">Non hai ancora lasciato nessuna recensione.</p>';
+    echo '<a href="profile.php" class="btn btn-primary mt-2">Lascia una recensione</a>';
+    echo '</div>';
+} else {
+    echo '<div class="row">';
+    foreach ($reviews as $review) {
+        echo '<div class="col-md-6">';
+        echo '<div class="card review-card h-100">';
+
+        $img = htmlspecialchars($review['immagine_attivita']);
+        $alt = htmlspecialchars($review['nome_attivita']);
+        echo '<img src="' . $img . '" class="card-img-top activity-img" alt="' . $alt . '">';
+
+        echo '<div class="card-body">';
+        echo '<h4 class="card-title">' . htmlspecialchars($review['nome_attivita']) . '</h4>';
+
+        echo '<div class="star-rating">';
+        for ($i = 1; $i <= 5; $i++) {
+            if ($i <= $review['voto']) {
+                echo '<i class="bi bi-star-fill"></i>';
+            } else {
+                echo '<i class="bi bi-star"></i>';
+            }
+        }
+        echo '<span class="ms-2">' . $review['voto'] . '/5</span>';
+        echo '</div>';
+
+        echo '<p class="card-text">' . nl2br(htmlspecialchars($review['testoRecensione'])) . '</p>';
+
+        $data = date('d/m/Y', strtotime($review['dataRecensione']));
+        echo '<p class="review-date"><i class="bi bi-calendar"></i> ' . $data . '</p>';
+
+        echo '</div>'; // fine card-body
+        echo '</div>'; // fine card
+        echo '</div>'; // fine col
+    }
+    echo '</div>'; // fine row
+}
+?>
+
         
         <div class="text-center mt-4 mb-5">
             <a href="profile.php" class="btn btn-primary">

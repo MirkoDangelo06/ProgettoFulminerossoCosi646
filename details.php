@@ -17,6 +17,12 @@
      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
      <style>
+        body {
+    overflow-x: hidden; /* Risolve immediatamente il problema */
+        }
+        .container, .row, [class^="col-"] {
+            max-width: 100%;
+        }
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Inter:slnt,wght@-10..0,100..900&display=swap');
         .orbitron-bold {
@@ -34,7 +40,7 @@
         }
      </style>
   </head>
-  <body style="background-color:#f3f5f6;">
+  <body>
     <?php
         $id_attivita = $_GET['id'];
         $query = $conn->query("SELECT * FROM attivita JOIN luogo ON luogo.id_parco = attivita.id_luogo JOIN locazione ON locazione.id_locazione = luogo.id_parco where attivita.id_attivita = '$id_attivita'");
@@ -52,7 +58,7 @@
     ?>
 
 
-    <div class="bg-dark text-white py-4 mb-4 shadow">
+    <div class=" text-white py-4 mb-4 shadow" style="background-color: #2D3748;"> 
           <div class="container">
             <div class="row">
                 <h5 class=" text-center mb-3 inter-paragrafi">Informazioni aggiuntive su:</h5>
@@ -87,28 +93,24 @@
             JOIN persona ON persona.id_persona = recensione.id_persona 
             WHERE attivita.id_attivita = '$id_attivita'");
 
-        if ($query2 && $query2->rowCount() > 0) {
+        if ($query2 && $query2->rowCount() > 0) { //controlla che l'attività abbia delle recensioni
           $queryMediaVoti = $conn->query("SELECT avg(recensione.voto) as mediaVoti from recensione where recensione.id_attivita = '$id_attivita'");
           echo '<div class="d-flex align-items-center">';// contenitore della media
-          echo '<h3 class="mb-0 mx-3 ">Media Voti:</h3>'; // mb-0 per togliere margine sotto, mr-2 per margine a destra
-          while ($row = $queryMediaVoti->fetch(PDO::FETCH_ASSOC)) {
-              $media = $row['mediaVoti'];
-              $mediaArrotondata = round($media); // Arrotonda correttamente (0.5 arrotonda per eccesso)
-              
-              // Oppure, per mostrare mezze stelle:
-              // $stellePiene = floor($media); // Parte intera
-              // $hasMezzaStella = ($media - $stellePiene) >= 0.5; // Verifica se c'è una mezza stella
-              
-              for ($i = 1; $i <= 5; $i++) {
-                  if ($i <= $mediaArrotondata) {
-                      echo '<span class="fa fa-star checked mt-2" style="margin-right: 2px;"></span>';
-                  } else {
-                      echo '<span class="fa fa-star mt-2" style="margin-right: 2px;"></span>';
-                  }
-              }
-          } 
-          echo '</div>';         
-          while ($row = $query2->fetch(PDO::FETCH_ASSOC)) {
+            echo '<h3 class="mb-0 mx-3 ">Media Voti:</h3>'; // mb-0 per togliere margine sotto, mr-2 per margine a destra
+            while ($row = $queryMediaVoti->fetch(PDO::FETCH_ASSOC)) {
+                $blankStars = 5 - $row['mediaVoti'];
+
+                for ($i = 0; $i < $row['mediaVoti']; $i++) {
+                    echo '<span class="fa fa-star checked mt-2" style="margin-right: 2px;"></span>';
+                }
+                for ($i = 0; $i < $blankStars; $i++) {
+                    echo '<span class="fa fa-star mt-2" style="margin-right: 2px;"></span>';
+                }
+            }
+          echo '</div>'; //chiusura contenitore della media
+          echo '<hr>';
+
+            while ($row = $query2->fetch(PDO::FETCH_ASSOC)) {
                 echo '<div class="mb-3 p-3 bg-light rounded">';
                 echo '<div class="d-flex justify-content-between">';
                 echo '<strong>' . htmlspecialchars($row['username']) . '</strong>';
@@ -131,7 +133,8 @@
         ?>
       </div>
       <?php
-        if (isset($_SESSION['user_id'])) {
+      //OPZIONI PER AGGIUNGERE O RIMUOVERE UN'ATTIVITA DALLA WISHLIST
+        if (isset($_SESSION['user_id'])) { //controlla se l'utente è loggato, se è loggato mostra i pulsanti
           $idUser = $_SESSION['user_id'];
           $stmt = $conn->prepare("SELECT * FROM interesse_attivita WHERE id_persona = :idUser AND id_attivita = :id_attivita");
           $stmt->execute([
@@ -160,7 +163,7 @@
                   <input type="hidden" name="id_Attivita" value="'.$id_attivita.'">
                   <input type="hidden" name="tipoAzione" value="add">  
                   <input type="hidden" name="idUser" value="'.$idUser.'">                      
-                  <button type="submit" class="btn btn-primary btn-lg">
+                  <button type="submit" class="btn btn-outline-dark btn-lg">
                       <i class="bi bi-list-task mb-5"></i>
                       <span>Aggiungi alla whishlist</span>
                   </button>
@@ -168,48 +171,9 @@
             <div>
             ';
           }
-
         }
       ?>
-<!--controllo sessione e possibilità di lasciare commento-->
-
-
-<br>
-<br>
-<?php
-      //$id_attivita
-        //PER INVIARE UNA RECENSIONE DALLA PAGINA DETAILS 
-          if (isset($_SESSION['user_id'])) { //controlla se l'utente è loggato, se è loggato mostra i pulsanti
-            $idUser = $_SESSION['user_id'];
-            echo '<div class="review-form mb-5 w-50 mx-auto my-auto"style="background-color:rgba(209, 210, 200, 0.75);" >
-                <h3 class="mb-4 text-center"><i class="bi bi-pencil-square"></i> Lascia una recensione</h3>
-                <form method="POST" action="profile.php">      
-                    <div class="mb-3">
-                        <label class="form-label">Voto</label>
-                        <div class="star-rating">
-                            <input type="hidden" name="voto" id="rating-value" required>
-                            <i class="bi bi-star" data-rating="1"></i>
-                            <i class="bi bi-star" data-rating="2"></i>
-                            <i class="bi bi-star" data-rating="3"></i>
-                            <i class="bi bi-star" data-rating="4"></i>
-                            <i class="bi bi-star" data-rating="5"></i>
-                        </div>
-                    </div>
-                    
-                    <div class="mb-3">
-                        <label for="testoRecensione" class="form-label">Recensione</label>
-                        <textarea class="form-control" id="testoRecensione" name="testoRecensione" rows="3" ></textarea>
-                    </div>
-                    <input type="hidden" name="attivita_id" id="attivita_id" value="'.$id_attivita.'">
-                    <button type="submit" name="submit_review" class="btn w-100 rounded-pill text-light" style="background-color: #2D3748;">Invia Recensione</button>
-                </form>
-            </div>';
-          }
-      ?>
-
-<br>
-
-<div class="text-center">
+      <div class="text-center">
         <?php
         //PER MOSTRARE IL PULSANTE CHE INDIRIZZA L'UTENTE AL SITO WEB DEL PARCO
         $queryLink = $conn->query("SELECT DISTINCT * FROM luogo JOIN attivita ON attivita.id_luogo = luogo.id_parco WHERE attivita.id_attivita = '$id_attivita'");
@@ -226,15 +190,46 @@
         }
       ?>
     </div>
-<br>
-
-      <div class="text-center">
+    <br>
+      <?php
+      //$id_attivita
+        //PER INVIARE UNA RECENSIONE DALLA PAGINA DETAILS 
+          if (isset($_SESSION['user_id'])) { //controlla se l'utente è loggato, se è loggato mostra i pulsanti
+            $idUser = $_SESSION['user_id'];
+            echo '<div class="rounded-3 review-form mb-5 w-50 mx-auto my-auto" style="background-color: rgba(229, 230, 220, 0.85); border: 1px solid #ccc;">
+                <h3 class="mb-4 text-center "><i class="bi bi-pencil-square"></i> Lascia una recensione</h3>
+                <form class="mt-3" method="POST" action="profile.php">      
+                    <div class="mb-3">
+                        <label class="form-label">Voto</label>
+                        <div class="star-rating">
+                            <input type="hidden" name="voto" id="rating-value" required>
+                            <i class="bi bi-star" data-rating="1"></i>
+                            <i class="bi bi-star" data-rating="2"></i>
+                            <i class="bi bi-star" data-rating="3"></i>
+                            <i class="bi bi-star" data-rating="4"></i>
+                            <i class="bi bi-star" data-rating="5"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3 w-75 mx-auto my-auto">
+                        <label for="testoRecensione" class="form-label ">Recensione</label>
+                        <textarea class="form-control" id="testoRecensione" name="testoRecensione" rows="3" ></textarea>
+                    </div>
+                    <input type="hidden" name="attivita_id" id="attivita_id" value="'.$id_attivita.'">
+                    <button type="submit" name="submit_review" class="btn w-50 rounded-pill text-light mb-3" style="background-color: #2D3748;">Invia Recensione</button>
+                </form>
+            </div>';
+          }
+      ?>
+        <!--pulsante per tornare alla home-->
+      <div class="text-center mb-2">
         <a href="./index.php" class="btn btn-success mt-3">Torna Indietro</a>
       </div>
 
 
 
     <script>
+      //LEAFLET
       // Coordinate ricavate con il fetch assoc
       var latitudine = <?php echo $latitudine; ?>;
       var longitudine = <?php echo $longitudine; ?>;
@@ -255,27 +250,28 @@
           .openPopup();
     </script>
 
+    <script>
+        // Sistema di valutazione a stelle per il form
 
-<script>
-    // Sistema di valutazione a stelle
-    document.querySelectorAll('.star-rating i').forEach(star => {
-        star.addEventListener('click', function() {
-            const rating = this.getAttribute('data-rating');
-            document.getElementById('rating-value').value = rating;
-            
-            // Aggiorna l'aspetto delle stelle
-            document.querySelectorAll('.star-rating i').forEach(s => {
-                if (s.getAttribute('data-rating') <= rating) {
-                    s.classList.remove('bi-star');
-                    s.classList.add('bi-star-fill');
-                } else {
-                    s.classList.remove('bi-star-fill');
-                    s.classList.add('bi-star');
-                }
+        document.querySelectorAll('.star-rating i').forEach(star => {
+            star.addEventListener('click', function() {
+                const rating = this.getAttribute('data-rating');
+                document.getElementById('rating-value').value = rating;
+                
+                // Aggiorna l'aspetto delle stelle
+                document.querySelectorAll('.star-rating i').forEach(s => {
+                    if (s.getAttribute('data-rating') <= rating) {
+                        s.classList.remove('bi-star');
+                        s.classList.add('bi-star-fill');
+                    } else {
+                        s.classList.remove('bi-star-fill');
+                        s.classList.add('bi-star');
+                    }
+                });
             });
         });
-    });
-</script>
+    </script>
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   </body>

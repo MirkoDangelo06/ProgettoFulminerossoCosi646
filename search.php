@@ -24,6 +24,11 @@
         font-style: normal;
         font-weight: 250; 
       }
+
+    .card-dimensione-fissa img {
+      height: 200px;
+      object-fit: cover;
+    }
     </style>
   </head>
   <body style="background-color:#f3f5f6;">
@@ -171,7 +176,7 @@
                    echo '</div><div class="row">';
                }
                echo '<div class="col-md-4 mb-4">';
-               echo '  <div class="card" style="width: 18rem;">';
+               echo '  <div class="card card-dimensione-fissa img" style="width: 18rem;">';
                echo '    <img src="' . htmlspecialchars($row['immagine_attivita']) . '" class="card-img-top object-fit-cover img-fluid">';
                echo '    <div class="card-body">';
                echo '      <h5 class="card-title orbitron-bold">' . htmlspecialchars($row['nome_attivita']) . '</h5>';

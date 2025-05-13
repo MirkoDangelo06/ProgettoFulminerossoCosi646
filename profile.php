@@ -179,7 +179,7 @@ try {
                     
                     <div class="mb-3">
                         <label for="testoRecensione" class="form-label">Recensione</label>
-                        <textarea class="form-control" id="testoRecensione" name="testoRecensione" rows="3" required></textarea>
+                        <textarea class="form-control" id="testoRecensione" name="testoRecensione" rows="3" ></textarea>
                     </div>
                     
                     <button type="submit" name="submit_review" class="btn w-100 rounded-pill text-light" style="background-color: #2D3748;">Invia Recensione</button>
