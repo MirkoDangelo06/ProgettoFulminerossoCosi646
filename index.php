@@ -399,6 +399,7 @@
           </div>
         </div>
       </div>
+      <a href="./backstage/schema.php" class="text-center text-white">retroscena</a>
     </div>
 </footer>
 
